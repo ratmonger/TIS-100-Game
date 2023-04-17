@@ -172,9 +172,8 @@ public class Interpreter implements Runnable {
                             BAK = srcint;
                             break;
                     }
-
-
                     break;
+
                 case "SAVE":
                     BAK = ACC;
                     break;

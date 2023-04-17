@@ -64,15 +64,12 @@ public class Main extends Application {
 
                 if(location[i][j].equals("port")){
 
-
-                   grid.add(new Label("port"),j,i);
+                    Label port = new Label("port");
+                    port.setAlignment(Pos.BASELINE_CENTER);
+                   grid.add(port,j,i);
                 }
                 if(location[i][j].equals("silo")){
-                    TextArea sil = new TextArea();
-
-                    sil.setEditable(false);
-                    sil.setMouseTransparent(true);
-                    sil.setFocusTraversable(false);
+                    TextArea sil = new TextArea();;
                     List<String> texts = instruct.get(outer);
                     for (String s : texts) {
                         sil.appendText(s + "\n");

@@ -12,86 +12,88 @@ public class Parcer {
     String word;
 
     static List<List> instruct = new ArrayList<List>();
+    static List<Queue> inputs = new ArrayList<Queue>();
     static String[][] newArray;
     static String[][] original;
     private static boolean scanningDone = false;
     private static Scanner input;
-    Queue<Integer> queue = new LinkedList<>();
+
     int row1;
     int col1;
 
 
     public Parcer() {
-            if (!scanningDone) {
-                input = new Scanner(System.in);
-                row1 = input.nextInt();
-                col1 = input.nextInt();
+        if (!scanningDone) {
+            input = new Scanner(System.in);
+            row1 = input.nextInt();
+            col1 = input.nextInt();
 
-                original = new String[row1][col1];
+            original = new String[row1][col1];
 
-                int numRows = 2 * original.length + 1;
-                int numCols = 2 * original[0].length + 1;
+            int numRows = 2 * original.length + 1;
+            int numCols = 2 * original[0].length + 1;
 
-                newArray = new String[numRows][numCols];
+            newArray = new String[numRows][numCols];
 
-                for (int i = 0; i < numRows; i++) {
-                    for (int j = 0; j < numCols; j++) {
-                        newArray[i][j]="****";
+            for (int i = 0; i < numRows; i++) {
+                for (int j = 0; j < numCols; j++) {
+                    newArray[i][j]="****";
+                }
+            }
+
+            for (int i = 0; i < original.length; i++) {
+                for (int j = 0; j < original[0].length; j++) {
+                    original[i][j] = "silo";
+                    newArray[i*2+1][j*2+1] =  original[i][j];
+                }
+            }
+            for (int i = 0; i < numRows; i++) {
+                for (int j = 0; j < numCols; j++) {
+                    if(newArray[i][j].equals("silo")){
+                        newArray[i+1][j]="port";
+                        newArray[i-1][j]="port";
+                        newArray[i][j+1]="port";
+                        newArray[i][j-1]="port";
                     }
                 }
-
-                for (int i = 0; i < original.length; i++) {
-                    for (int j = 0; j < original[0].length; j++) {
-                        original[i][j] = "silo";
-                        newArray[i*2+1][j*2+1] =  original[i][j];
-                    }
-                }
-                for (int i = 0; i < numRows; i++) {
-                    for (int j = 0; j < numCols; j++) {
-                        if(newArray[i][j].equals("silo")){
-                            newArray[i+1][j]="port";
-                            newArray[i-1][j]="port";
-                            newArray[i][j+1]="port";
-                            newArray[i][j-1]="port";
-                        }
-                    }
-                }
-                String line = input.nextLine();
-                line = input.nextLine();
-                while(!line.equals("INPUT")){
-                    List<String> parts = new ArrayList<String>();
-                    while(!line.equals("END")){
-                        parts.add(line);
-                        line = input.nextLine();
-                    }
-                    instruct.add(parts);
+            }
+            String line = input.nextLine();
+            line = input.nextLine();
+            while(!line.equals("INPUT")){
+                List<String> parts = new ArrayList<String>();
+                while(!line.equals("END")){
+                    parts.add(line);
                     line = input.nextLine();
                 }
-
-
-
-                while(input.hasNextLine()) {
-
-                    if (line.equals("INPUT")) {
-                        inputFN();
-                    } else if (line.equals("OUTPUT")) {
-                        outputFN();
-                    }
-                    try {
-                        line = input.nextLine();
-                    } catch (NoSuchElementException e) {
-                        break;
-                    }
-                }
-                scanningDone = true;
-                System.out.println("");
-                printarray(newArray);
-
+                instruct.add(parts);
+                line = input.nextLine();
             }
+
+
+
+            while(input.hasNextLine()) {
+
+                if (line.equals("INPUT")) {
+                    inputFN();
+                } else if (line.equals("OUTPUT")) {
+                    outputFN();
+                }
+                try {
+                    line = input.nextLine();
+                } catch (NoSuchElementException e) {
+                    break;
+                }
+            }
+            scanningDone = true;
+            System.out.println("");
+            printarray(newArray);
 
         }
 
+    }
+
     public  void inputFN(){
+        Queue<Integer> queue = new LinkedList<>();
         int row = input.nextInt();
         int col = input.nextInt();
         String val = input.next();
@@ -99,6 +101,7 @@ public class Parcer {
             queue.add(Integer.valueOf(val));
             val = input.next();
         }
+        inputs.add(queue);
         row = 2*row+1;
         col = 2*col+1;
         if(row==-1)
@@ -153,7 +156,7 @@ public class Parcer {
     public String[][] getarray(){
         return newArray;
     }
-    public Queue<Integer> getQueue(){
-        return queue;
+    public List<Queue> getinputs(){
+        return inputs;
     }
 }

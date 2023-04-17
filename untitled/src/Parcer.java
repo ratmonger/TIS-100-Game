@@ -12,8 +12,9 @@ public class Parcer {
     String word;
 
     static List<List> instruct = new ArrayList<List>();
-    static List<Queue> inputs = new ArrayList<Queue>();
+
     static String[][] newArray;
+    static Queue[][] inputs;
     static String[][] original;
     private static boolean scanningDone = false;
     private static Scanner input;
@@ -34,6 +35,7 @@ public class Parcer {
             int numCols = 2 * original[0].length + 1;
 
             newArray = new String[numRows][numCols];
+            inputs = new Queue[numRows][numCols];
 
             for (int i = 0; i < numRows; i++) {
                 for (int j = 0; j < numCols; j++) {
@@ -101,7 +103,6 @@ public class Parcer {
             queue.add(Integer.valueOf(val));
             val = input.next();
         }
-        inputs.add(queue);
         row = 2*row+1;
         col = 2*col+1;
         if(row==-1)
@@ -114,6 +115,7 @@ public class Parcer {
             col = col-1;
 
         newArray[row][col]="inpt";
+        inputs[row][col]=queue;
 
     }
 
@@ -156,7 +158,7 @@ public class Parcer {
     public String[][] getarray(){
         return newArray;
     }
-    public List<Queue> getinputs(){
+    public Queue[][] getinputs(){
         return inputs;
     }
 }

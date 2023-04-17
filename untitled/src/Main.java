@@ -12,6 +12,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.util.List;
+import java.util.Queue;
 import java.util.concurrent.CountDownLatch;
 
 public class Main extends Application {
@@ -23,7 +24,6 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
 
         int counter = 0;
-        int queuecounter = 0;
         Parcer parcer = new Parcer();
         String[][] location = parcer.getarray();
         int size = ((location.length-1)/2)*((location[0].length-1)/2);
@@ -38,8 +38,7 @@ public class Main extends Application {
                 }
                 if(location[i][j].equals("inpt")){
                     objects[i][j] = new InputPort();
-                    objects[i][j].getInQueue().addAll(parcer.getinputs().get(queuecounter));
-                    queuecounter++;
+                    objects[i][j].getInQueue().addAll(parcer.getinputs()[i][j]);
                 }
             }
         }

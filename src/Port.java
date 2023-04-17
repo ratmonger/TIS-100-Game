@@ -13,6 +13,10 @@ public class Port implements Runnable, Component {
         this.outQueue = new LinkedBlockingQueue<>();
     }
 
+    public int peekPort(){
+        return outQueue.peek();
+    }
+
     public BlockingQueue<Integer> getInQueue() {
         return inQueue;
     }

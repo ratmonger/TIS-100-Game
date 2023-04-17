@@ -15,12 +15,16 @@ public class Parcer {
 
     static String[][] newArray;
     static Queue[][] inputs;
+    static ArrayList[][] outputs;
     static String[][] original;
     private static boolean scanningDone = false;
     private static Scanner input;
 
     int row1;
     int col1;
+
+    int numRows;
+    int numCols;
 
 
     public Parcer() {
@@ -31,8 +35,8 @@ public class Parcer {
 
             original = new String[row1][col1];
 
-            int numRows = 2 * original.length + 1;
-            int numCols = 2 * original[0].length + 1;
+            this.numRows = 2 * original.length + 1;
+            this.numCols = 2 * original[0].length + 1;
 
             newArray = new String[numRows][numCols];
             inputs = new Queue[numRows][numCols];
@@ -151,12 +155,22 @@ public class Parcer {
 
     }
 
+    // returns original grid size
     public int getRows(){
         return row1;
     }
 
     public int getCols(){
         return col1;
+    }
+
+    // returns expanded grid size
+    public int getRowsNew(){
+        return numRows;
+    }
+
+    public int getColsNew(){
+        return numCols;
     }
 
 

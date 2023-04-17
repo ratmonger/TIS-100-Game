@@ -45,10 +45,13 @@ public class Main extends Application {
                     objects[i][j].getInQueue().addAll(parcer.getinputs()[i][j]);
                     elements[i][j] = objects[i][j];
                 }
+                if(location[i][j].equals("oupt")){
+                    objects[i][j] = new OutPort();
+                    elements[i][j] = objects[i][j];
+                }
             }
         }
         // missing output ports???
-
 
         for (int i = 0; i < location.length; i++) {
             for (int j = 0; j < location[0].length; j++) {

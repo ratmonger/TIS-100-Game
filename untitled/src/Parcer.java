@@ -68,17 +68,23 @@ public class Parcer {
                     line = input.nextLine();
                 }
 
-                while(line.equals("INPUT")){
 
-                    inputFN();
-                    line = input.nextLine();
-                    line = input.nextLine();
-                }
-                while(line.equals("OUTPUT")){
-                    outputFN();
-                    line = input.nextLine();
+
+                while(input.hasNextLine()) {
+
+                    if (line.equals("INPUT")) {
+                        inputFN();
+                    } else if (line.equals("OUTPUT")) {
+                        outputFN();
+                    }
+                    try {
+                        line = input.nextLine();
+                    } catch (NoSuchElementException e) {
+                        break;
+                    }
                 }
                 scanningDone = true;
+                System.out.println("");
                 printarray(newArray);
 
             }
@@ -135,6 +141,7 @@ public class Parcer {
             col = col-1;
 
         newArray[row][col]="oupt";
+        input.next();
 
 
     }

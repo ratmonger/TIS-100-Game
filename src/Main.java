@@ -33,6 +33,7 @@ public class Main extends Application {
                 new Component[location.length][location[0].length];
         // array containing ALL components
         CountDownLatch latch = new CountDownLatch(size);
+        System.out.println(latch.getCount());
 
         for (int i = 0; i < location.length; i++) {
             for (int j = 0; j < location[0].length; j++) {
@@ -51,7 +52,6 @@ public class Main extends Application {
                 }
             }
         }
-        // missing output ports???
 
         for (int i = 0; i < location.length; i++) {
             for (int j = 0; j < location[0].length; j++) {

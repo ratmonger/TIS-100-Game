@@ -15,7 +15,6 @@ public class Parcer {
 
     static String[][] newArray;
     static Queue[][] inputs;
-    static ArrayList[][] outputs;
     static String[][] original;
     private static boolean scanningDone = false;
     private static Scanner input;

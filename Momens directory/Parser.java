@@ -35,7 +35,8 @@ public class Parser {
         try {
             input = new Scanner(file);
         } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
+            System.out.println("File was not found!");
+            System.exit(1);
         }
         row = input.nextInt();
         col = input.nextInt();

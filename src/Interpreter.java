@@ -32,6 +32,20 @@ public class Interpreter implements Runnable {
         while (true) {
             if (count > parcer.getinstruct().get(index).size() - 1)
                 count = 0;
+
+            if (this.upPort.getOutQueue() != null && this.upPort.getOutQueue().size() > 0 ||
+                    this.downPort.getOutQueue() != null && this.downPort.getOutQueue().size() > 0 ||
+                    this.leftPort.getOutQueue() != null && this.leftPort.getOutQueue().size() > 0 ||
+                    this.rightPort.getOutQueue() != null && this.rightPort.getOutQueue().size() > 0 ){
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                continue;
+            }
+
+
             String word = (String) parcer.getinstruct().get(index).get(count);
             Scanner sc = new Scanner(word);
             int srcint = 0;

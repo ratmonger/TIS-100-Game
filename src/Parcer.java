@@ -151,6 +151,14 @@ public class Parcer {
 
     }
 
+    public int getRows(){
+        return row1;
+    }
+
+    public int getCols(){
+        return col1;
+    }
+
 
     public List<List> getinstruct(){
         return instruct;

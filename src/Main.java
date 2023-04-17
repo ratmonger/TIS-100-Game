@@ -26,31 +26,44 @@ public class Main extends Application {
         int counter = 0;
         Parcer parcer = new Parcer();
         String[][] location = parcer.getarray();
-        int size = ((location.length-1)/2)*((location[0].length-1)/2);
+        int size = parcer.getRows() * parcer.getCols();
         List<List> instruct= parcer.getinstruct();
         Port[][] objects = new Port[location.length][location[0].length];
+        Component[][] elements =
+                new Component[location.length][location[0].length];
+        // array containing ALL components
         CountDownLatch latch = new CountDownLatch(size);
 
         for (int i = 0; i < location.length; i++) {
             for (int j = 0; j < location[0].length; j++) {
                 if(location[i][j].equals("port")){
                     objects[i][j] = new Port();
+                    elements[i][j] = objects[i][j];
                 }
                 if(location[i][j].equals("inpt")){
                     objects[i][j] = new InputPort();
                     objects[i][j].getInQueue().addAll(parcer.getinputs()[i][j]);
+                    elements[i][j] = objects[i][j];
                 }
             }
         }
+        // missing output ports???
+
+
         for (int i = 0; i < location.length; i++) {
             for (int j = 0; j < location[0].length; j++) {
                 if(location[i][j].equals("silo")){
-                    Thread silo = new Thread(new Interpreter((objects[i-1][j]),objects[i+1][j],objects[i][j-1],objects[i][j+1], latch, counter));
+                    Interpreter interp = new Interpreter((objects[i-1][j]),
+                                                         objects[i+1][j],objects[i][j-1],objects[i][j+1], latch, counter);
+                    Thread silo = new Thread(interp);
+                    elements[i][j] = new Silo(silo, interp);//pass thread and
+                    // interp to new silo class
                     silo.start();
                     counter++;
                 }
             }
         }
+
 
 
 

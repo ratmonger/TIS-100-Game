@@ -1,7 +1,9 @@
+import javafx.scene.layout.HBox;
+
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
-public class Port implements Runnable{
+public class Port implements Runnable, Component {
 
     private final BlockingQueue<Integer> inQueue;
     private final BlockingQueue<Integer> outQueue;
@@ -22,5 +24,9 @@ public class Port implements Runnable{
         System.out.println("waiting for input");
     }
 
+    @Override
+    public HBox toGUI() {
+        return null;
+    }
 }
 

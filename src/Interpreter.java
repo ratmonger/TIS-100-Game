@@ -34,8 +34,8 @@ public class Interpreter implements Runnable {
                 count = 0;
 
             if (this.upPort.getOutQueue() != null && this.upPort.getOutQueue().size() > 0 ||
-                    this.downPort.getOutQueue() != null && this.downPort.getOutQueue().size() > 0 ||
-                    this.leftPort.getOutQueue() != null && this.leftPort.getOutQueue().size() > 0 ||
+                    this.downPort.getInQueue() != null && this.downPort.getInQueue().size() > 0 ||
+                    this.leftPort.getInQueue() != null && this.leftPort.getInQueue().size() > 0 ||
                     this.rightPort.getOutQueue() != null && this.rightPort.getOutQueue().size() > 0 ){
                 try {
                     Thread.sleep(2000);

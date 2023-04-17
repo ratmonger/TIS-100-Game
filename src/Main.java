@@ -22,6 +22,17 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        BorderPane root = new BorderPane();
+
+        root.getChildren().clear();
+
+        GridPane grid = new GridPane();
+        grid.setHgap(10);
+        grid.setVgap(10);
+        grid.setAlignment(Pos.CENTER_RIGHT);
+        VBox vbox1 = new VBox();
+        vbox1.setSpacing(200);
+        vbox1.setAlignment(Pos.CENTER);
 
         int counter = 0;
         Parcer parcer = new Parcer();
@@ -45,6 +56,20 @@ public class Main extends Application {
                     objects[i][j] = new InputPort(i % 2);
                     objects[i][j].getInQueue().addAll(parcer.getinputs()[i][j]);
                     elements[i][j] = objects[i][j];
+                    HBox hbox1 = new HBox();
+                    vbox1.getChildren().add(hbox1);
+                    TextArea input = new TextArea("input\n");
+                    input.setEditable(false);
+                    TextArea output = new TextArea("output");
+                    output.setEditable(false);
+                    input.setPrefSize(50,200);
+                    output.setPrefSize(50,200);
+                    hbox1.setSpacing(10);
+                    for (Object s : parcer.getinputs()[i][j]) {
+                        input.appendText(s + "\n");
+                    }
+                    hbox1.getChildren().addAll(input,output);
+
                 }
                 if (location[i][j].equals("oupt")) {
                     objects[i][j] = new OutPort(i % 2);
@@ -70,14 +95,7 @@ public class Main extends Application {
             }
         }
 
-        BorderPane root = new BorderPane();
 
-        root.getChildren().clear();
-
-        GridPane grid = new GridPane();
-        grid.setHgap(10);
-        grid.setVgap(10);
-        grid.setAlignment(Pos.CENTER_RIGHT);
         int outer = 0;
         for (int i = 0; i < location.length; i++) {
             for (int j = 0; j < location[0].length; j++) {
@@ -115,21 +133,8 @@ public class Main extends Application {
         }
 
 
-        VBox vbox1 = new VBox();
-        HBox hbox1 = new HBox();
-        HBox hbox2 = new HBox();
-        vbox1.getChildren().addAll(hbox1, hbox2);
-        vbox1.setSpacing(200);
-        vbox1.setAlignment(Pos.CENTER);
-        TextArea input = new TextArea("input");
-        input.setEditable(false);
-        TextArea output = new TextArea("output");
-        output.setEditable(false);
-        input.setPrefSize(50, 200);
-        output.setPrefSize(50, 200);
-        hbox1.setSpacing(10);
-        hbox1.getChildren().addAll(input, output);
 
+        HBox hbox2 = new HBox();
         Button start = new Button("start");
         Button pause = new Button("pause");
         Button halt = new Button("Halt");
@@ -137,6 +142,7 @@ public class Main extends Application {
         hbox2.setSpacing(10);
         hbox2.getChildren().addAll(halt, pause, start);
         hbox2.setAlignment(Pos.BOTTOM_CENTER);
+        vbox1.getChildren().add(hbox2);
         root.setCenter(grid);
         root.setLeft(vbox1);
         primaryStage.setTitle("Silos");

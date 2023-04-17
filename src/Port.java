@@ -7,8 +7,10 @@ public class Port implements Runnable, Component {
 
     private final BlockingQueue<Integer> inQueue;
     private final BlockingQueue<Integer> outQueue;
+    private int rowOffset;
 
-    public Port() {
+    public Port(int x) {
+        rowOffset = x;
         this.inQueue = new LinkedBlockingQueue<>();
         this.outQueue = new LinkedBlockingQueue<>();
     }
@@ -21,6 +23,12 @@ public class Port implements Runnable, Component {
     // removes and returns the first element
     public int popPort(){
         return outQueue.poll();
+    }
+
+    // if 0, port is located above/below silos
+    // if 1, port is left/right of silo
+    public int getRowOffset(){
+        return rowOffset;
     }
 
 

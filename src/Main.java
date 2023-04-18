@@ -32,9 +32,6 @@ public class Main extends Application {
         home.setAlignment(Pos.CENTER);
         home.getChildren().add(vbox0);
         butt.setOnAction(e -> createroot());
-
-
-
         primaryStage.setTitle("Silos");
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -63,6 +60,18 @@ public class Main extends Application {
         inbox.setSpacing(10);
         inout.setSpacing(10);
         outbox.setSpacing(10);
+        HBox hbox2 = new HBox();
+        Button start = new Button("start");
+        Button pause = new Button("pause");
+        Button halt = new Button("Halt");
+        start.setAlignment(Pos.BOTTOM_CENTER);
+        hbox2.setSpacing(10);
+        hbox2.getChildren().addAll(halt, pause, start);
+        hbox2.setAlignment(Pos.BOTTOM_CENTER);
+        vbox1.getChildren().add(hbox2);
+        root.setPadding(new Insets(10));
+        root.setCenter(grid);
+        root.setLeft(vbox1);
 
         vbox1.setAlignment(Pos.CENTER);
 
@@ -133,7 +142,8 @@ public class Main extends Application {
                     Thread silo = new Thread(interp);
                     elements[i][j] = new Silo(silo, interp);//pass thread and
                     // interp to new silo class
-                    silo.start();
+                    start.setOnAction(e -> silo.start());
+
                     counter++;
                 }
             }
@@ -201,20 +211,6 @@ public class Main extends Application {
             }
         }
 
-
-
-        HBox hbox2 = new HBox();
-        Button start = new Button("start");
-        Button pause = new Button("pause");
-        Button halt = new Button("Halt");
-        start.setAlignment(Pos.BOTTOM_CENTER);
-        hbox2.setSpacing(10);
-        hbox2.getChildren().addAll(halt, pause, start);
-        hbox2.setAlignment(Pos.BOTTOM_CENTER);
-        vbox1.getChildren().add(hbox2);
-        root.setPadding(new Insets(10));
-        root.setCenter(grid);
-        root.setLeft(vbox1);
 
 
     }

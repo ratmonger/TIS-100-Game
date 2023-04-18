@@ -6,9 +6,5 @@ public class InputPort extends Port {
         super(x);
     }
 
-    @Override
-    public BlockingQueue<Integer> getOutQueue() {
-        return null;
-    }
 
 }

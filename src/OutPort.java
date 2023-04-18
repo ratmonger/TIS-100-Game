@@ -7,10 +7,6 @@ public class OutPort extends Port {
         super(x);
     }
 
-    @Override
-    public BlockingQueue<Integer> getInQueue() {
-        return null;
-    }
 
 }
 

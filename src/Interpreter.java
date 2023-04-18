@@ -196,13 +196,7 @@ public class Interpreter implements Runnable {
         int srcint = 0;
         switch (src) {
             case "UP":
-                if (upPort instanceof InputPort) {
-                    try {
-                        srcint = upPort.getInQueue().take();
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
-                } else if (upPort instanceof OutPort) {
+                if (upPort instanceof OutPort) {
                     // upPort is an output port
                 } else {
                     try {
@@ -214,13 +208,7 @@ public class Interpreter implements Runnable {
                 }
                 break;
             case "DOWN":
-                if (downPort instanceof InputPort) {
-                    try {
-                        srcint = downPort.getInQueue().take();
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
-                } else if (upPort instanceof OutPort) {
+                if (downPort instanceof OutPort) {
                     // upPort is an output port
                 } else {
                     try {
@@ -232,13 +220,7 @@ public class Interpreter implements Runnable {
                 }
                 break;
             case "LEFT":
-                if (leftPort instanceof InputPort) {
-                    try {
-                        srcint = leftPort.getInQueue().take();
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
-                } else if (upPort instanceof OutPort) {
+                if (leftPort instanceof OutPort) {
                     // upPort is an output port
                 } else {
                     try {
@@ -250,13 +232,7 @@ public class Interpreter implements Runnable {
                 }
                 break;
             case "RIGHT":
-                if (rightPort instanceof InputPort) {
-                    try {
-                        srcint = rightPort.getInQueue().take();
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
-                } else if (upPort instanceof OutPort) {
+                if (rightPort instanceof OutPort) {
                     // upPort is an output port
                 } else {
                     try {

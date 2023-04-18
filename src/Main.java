@@ -15,14 +15,34 @@ import java.util.Queue;
 import java.util.concurrent.CountDownLatch;
 
 public class Main extends Application {
+    Scene scene;
     public static void main(String[] args) {
         launch(args);
     }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        BorderPane root = new BorderPane();
+        StackPane home = new StackPane();
+        scene = new Scene(home, 800, 800);
+        Label name = new Label("TIS 101");
+        Button butt = new Button("Start");
+        VBox vbox0 = new VBox();
+        vbox0.getChildren().addAll(name,butt);
+        vbox0.setAlignment(Pos.CENTER);
+        home.setAlignment(Pos.CENTER);
+        home.getChildren().add(vbox0);
+        butt.setOnAction(e -> createroot());
 
+
+
+        primaryStage.setTitle("Silos");
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+
+    public void createroot(){
+        BorderPane root = new BorderPane();
+        scene.setRoot(root);
         root.getChildren().clear();
         root.setBackground(Background.fill(Color.rgb(23, 23, 23)));
 
@@ -106,10 +126,10 @@ public class Main extends Application {
             for (int j = 0; j < location[0].length; j++) {
                 if (location[i][j].equals("silo")) {
                     Interpreter interp = new Interpreter((objects[i - 1][j]),
-                                                         objects[i + 1][j],
-                                                         objects[i][j - 1],
-                                                         objects[i][j + 1],
-                                                         latch, counter);
+                            objects[i + 1][j],
+                            objects[i][j - 1],
+                            objects[i][j + 1],
+                            latch, counter);
                     Thread silo = new Thread(interp);
                     elements[i][j] = new Silo(silo, interp);//pass thread and
                     // interp to new silo class
@@ -195,10 +215,6 @@ public class Main extends Application {
         root.setPadding(new Insets(10));
         root.setCenter(grid);
         root.setLeft(vbox1);
-        primaryStage.setTitle("Silos");
-        Scene scene = new Scene(root, 800, 800);
-        primaryStage.setScene(scene);
-        primaryStage.show();
 
 
     }

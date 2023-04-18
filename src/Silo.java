@@ -1,3 +1,4 @@
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 
 public class Silo implements Component{
@@ -11,7 +12,7 @@ public class Silo implements Component{
     }
 
     @Override
-    public HBox toGUI() {
+    public BorderPane toGUI() {
         return null;
     }
 }

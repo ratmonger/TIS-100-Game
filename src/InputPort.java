@@ -1,3 +1,4 @@
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 
 public class InputPort extends Port {
@@ -8,7 +9,7 @@ public class InputPort extends Port {
     }
 
     @Override
-    public HBox toGUI() {
+    public BorderPane toGUI() {
         return null;
     }
 

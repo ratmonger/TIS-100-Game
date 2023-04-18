@@ -2,6 +2,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Background;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -57,7 +58,7 @@ public class Port implements Runnable, Component {
     }
 
     @Override
-    public HBox toGUI() {
+    public BorderPane toGUI() {
 
         /*
         in
@@ -77,8 +78,10 @@ public class Port implements Runnable, Component {
 
 
         HBox hbox = new HBox();
+        hbox.setAlignment(Pos.CENTER);
         //hbox.setBackground(Background.fill(Color.YELLOW)); // display box size
         VBox vbox = new VBox();
+        vbox.setAlignment(Pos.CENTER);
         hbox.setMinSize(50, 50);
         hbox.setMaxSize(50, 50);
         vbox.setMinSize(50, 50);
@@ -99,6 +102,7 @@ public class Port implements Runnable, Component {
             vbox.getChildren().add(in);
         } else {
             HBox hbox2 = new HBox();
+            hbox2.setAlignment(Pos.CENTER);
             vbox.getChildren().add(hbox2);
             hbox2.getChildren().add(out);
             hbox2.getChildren().add(UpArrow(0, 0));
@@ -106,7 +110,8 @@ public class Port implements Runnable, Component {
             hbox2.getChildren().add(in);
         }
         hbox.getChildren().add(vbox);
-        return hbox;
+        BorderPane temp = new BorderPane(hbox);
+        return temp;
     }
 
 

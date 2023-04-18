@@ -1,3 +1,4 @@
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 
 import java.util.concurrent.LinkedBlockingQueue;
@@ -11,7 +12,7 @@ public class OutPort extends Port {
     }
 
     @Override
-    public HBox toGUI() {
+    public BorderPane toGUI() {
         return null;
     }
 

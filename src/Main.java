@@ -1,5 +1,6 @@
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -122,7 +123,7 @@ public class Main extends Application {
         for (int i = 0; i < location.length; i++) {
             for (int j = 0; j < location[0].length; j++) {
                 if (i == 0 || i == location.length - 1 || j == 0 ||
-                        i == location[0].length - 1) {
+                        j == location[0].length - 1) {
                     if (elements[i][j] instanceof Port &
                             !(elements[i][j] instanceof InputPort) &
                             !(elements[i][j] instanceof OutPort)) {
@@ -146,7 +147,7 @@ public class Main extends Application {
                     port.setAlignment(Pos.BASELINE_CENTER);
                     //grid.add(port, j, i);
                     if (elements[i][j] != null) {
-                        HBox temp = elements[i][j].toGUI();
+                        BorderPane temp = elements[i][j].toGUI();
                         grid.add(temp, j, i);
                     } else {
                         HBox temp = new HBox();
@@ -191,6 +192,7 @@ public class Main extends Application {
         hbox2.getChildren().addAll(halt, pause, start);
         hbox2.setAlignment(Pos.BOTTOM_CENTER);
         vbox1.getChildren().add(hbox2);
+        root.setPadding(new Insets(10));
         root.setCenter(grid);
         root.setLeft(vbox1);
         primaryStage.setTitle("Silos");

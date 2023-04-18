@@ -1,3 +1,4 @@
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 
 public interface Component {
@@ -8,7 +9,7 @@ public interface Component {
 
 
     /* returns GUI representation of the component*/
-    HBox toGUI();
+    BorderPane toGUI();
 
 
 

@@ -5,10 +5,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.util.List;
@@ -25,6 +23,7 @@ public class Main extends Application {
         BorderPane root = new BorderPane();
 
         root.getChildren().clear();
+        root.setBackground(Background.fill(Color.rgb(23, 23, 23)));
 
         GridPane grid = new GridPane();
         grid.setHgap(10);
@@ -62,11 +61,11 @@ public class Main extends Application {
         for (int i = 0; i < location.length; i++) {
             for (int j = 0; j < location[0].length; j++) {
                 if (location[i][j].equals("port")) {
-                    objects[i][j] = new Port(i % 2);
+                    objects[i][j] = new Port(i,j);
                     elements[i][j] = objects[i][j];
                 }
                 if (location[i][j].equals("inpt")) {
-                    objects[i][j] = new InputPort(i % 2);
+                    objects[i][j] = new InputPort(i , j);
                     if (i == 0 || j == location[0].length -1) {
                         objects[i][j].getInQueue()
                                 .addAll(parcer.getinputs()[i][j]);
@@ -88,7 +87,7 @@ public class Main extends Application {
 
                 }
                 if (location[i][j].equals("oupt")) {
-                    objects[i][j] = new OutPort(i % 2);
+                    objects[i][j] = new OutPort(i, j);
                     elements[i][j] = objects[i][j];
 
                     TextArea output = new TextArea("output");
@@ -119,6 +118,23 @@ public class Main extends Application {
             }
         }
 
+        // remove boundary ports
+        for (int i = 0; i < location.length; i++) {
+            for (int j = 0; j < location[0].length; j++) {
+                if (i == 0 || i == location.length - 1 || j == 0 ||
+                        i == location[0].length - 1) {
+                    if (elements[i][j] instanceof Port &
+                            !(elements[i][j] instanceof InputPort) &
+                            !(elements[i][j] instanceof OutPort)) {
+                        elements[i][j] = null;
+                    }
+
+                }
+
+            }
+        }
+
+        grid.getChildren().clear();
 
         int outer = 0;
         for (int i = 0; i < location.length; i++) {
@@ -128,7 +144,15 @@ public class Main extends Application {
 
                     Label port = new Label("port");
                     port.setAlignment(Pos.BASELINE_CENTER);
-                    grid.add(port, j, i);
+                    //grid.add(port, j, i);
+                    if (elements[i][j] != null) {
+                        HBox temp = elements[i][j].toGUI();
+                        grid.add(temp, j, i);
+                    } else {
+                        HBox temp = new HBox();
+                        grid.add(temp, j, i);
+                    }
+
                 }
                 if (location[i][j].equals("silo")) {
                     TextArea sil = new TextArea();

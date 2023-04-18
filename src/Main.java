@@ -29,10 +29,23 @@ public class Main extends Application {
         GridPane grid = new GridPane();
         grid.setHgap(10);
         grid.setVgap(10);
+        HBox inout = new HBox();
+
         grid.setAlignment(Pos.CENTER_RIGHT);
         VBox vbox1 = new VBox();
-        vbox1.setSpacing(200);
+        VBox inbox = new VBox();
+        VBox outbox = new VBox();
+        outbox.setAlignment(Pos.CENTER);
+        inbox.setAlignment(Pos.CENTER);
+        inout.getChildren().addAll(inbox,outbox);
+        vbox1.getChildren().add(inout);
+        vbox1.setSpacing(10);
+        inbox.setSpacing(10);
+        inout.setSpacing(10);
+        outbox.setSpacing(10);
+
         vbox1.setAlignment(Pos.CENTER);
+
 
         int counter = 0;
         Parcer parcer = new Parcer();
@@ -56,24 +69,28 @@ public class Main extends Application {
                     objects[i][j] = new InputPort(i % 2);
                     objects[i][j].getInQueue().addAll(parcer.getinputs()[i][j]);
                     elements[i][j] = objects[i][j];
-                    HBox hbox1 = new HBox();
-                    vbox1.getChildren().add(hbox1);
+
                     TextArea input = new TextArea("input\n");
                     input.setEditable(false);
-                    TextArea output = new TextArea("output");
-                    output.setEditable(false);
                     input.setPrefSize(50,200);
-                    output.setPrefSize(50,200);
-                    hbox1.setSpacing(10);
+
                     for (Object s : parcer.getinputs()[i][j]) {
                         input.appendText(s + "\n");
                     }
-                    hbox1.getChildren().addAll(input,output);
+                    inbox.getChildren().addAll(input);
 
                 }
                 if (location[i][j].equals("oupt")) {
                     objects[i][j] = new OutPort(i % 2);
                     elements[i][j] = objects[i][j];
+
+                    TextArea output = new TextArea("output");
+                    output.setEditable(false);
+                    output.setPrefSize(50,200);
+                    output.setMaxSize(50,200);
+                    output.setMinSize(50,200);
+                    outbox.getChildren().addAll(output);
+
                 }
             }
         }

@@ -64,14 +64,18 @@ public class Parcer {
             }
             String line = input.nextLine();
             line = input.nextLine();
-            while(!line.equals("INPUT")){
+            while(!line.equals("INPUT")&&!line.equals("OUTPUT")){
                 List<String> parts = new ArrayList<String>();
                 while(!line.equals("END")){
                     parts.add(line);
                     line = input.nextLine();
                 }
                 instruct.add(parts);
-                line = input.nextLine();
+                try {
+                    line = input.nextLine();
+                } catch (NoSuchElementException e) {
+                    break;
+                }
             }
 
 
@@ -104,7 +108,11 @@ public class Parcer {
         String val = input.next();
         while (!val.equals("END")){
             queue.add(Integer.valueOf(val));
-            val = input.next();
+            try {
+                val = input.next();
+            } catch (NoSuchElementException e) {
+                break;
+            }
         }
         row = 2*row+1;
         col = 2*col+1;

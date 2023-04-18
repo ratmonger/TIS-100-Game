@@ -16,6 +16,8 @@ import java.util.concurrent.CountDownLatch;
 
 public class Main extends Application {
     Scene scene;
+    Component[][] elements;
+    String[][] location;
 
     public static void main(String[] args) {
         launch(args);
@@ -79,12 +81,11 @@ public class Main extends Application {
 
         int counter = 0;
         Parcer parcer = new Parcer();
-        String[][] location = parcer.getarray();
+        location = parcer.getarray();
         int size = parcer.getRows() * parcer.getCols();
         List<List> instruct = parcer.getinstruct();
         Port[][] objects = new Port[location.length][location[0].length];
-        Component[][] elements =
-                new Component[location.length][location[0].length];
+        this.elements = new Component[location.length][location[0].length];
         // array containing ALL components
         CountDownLatch latch = new CountDownLatch(size);
 
@@ -146,12 +147,15 @@ public class Main extends Application {
                     Thread silo = new Thread(interp);
                     elements[i][j] = new Silo(silo, interp);//pass thread and
                     // interp to new silo class
-                    start.setOnAction(e -> silo.start());
+                    start.setOnAction(e -> startAllSilo());
 
                     counter++;
                 }
             }
         }
+
+
+
 
         // remove boundary ports
         for (int i = 0; i < location.length; i++) {
@@ -230,6 +234,17 @@ public class Main extends Application {
         }
 
 
+    }
+
+    public void startAllSilo() {
+        for (int i = 0; i < location.length; i++) {
+            for (int j = 0; j < location[0].length; j++) {
+                if (location[i][j].equals("silo")) {
+                    ((Silo) elements[i][j]).startSilo();
+
+                }
+            }
+        }
     }
 
 

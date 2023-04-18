@@ -15,4 +15,12 @@ public class Silo implements Component{
     public BorderPane toGUI() {
         return null;
     }
+
+    public void runSilo(){
+        siloThread.run();
+    }
+
+    public void startSilo(){
+        siloThread.start();
+    }
 }

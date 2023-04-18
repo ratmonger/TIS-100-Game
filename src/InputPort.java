@@ -3,9 +3,9 @@ import javafx.scene.layout.HBox;
 
 public class InputPort extends Port {
 
-    public InputPort(int x, int y){
-        super(x, y);
 
+    public InputPort(int i, int j, int length, int length1) {
+        super(i,j,length, length1);
     }
 
     @Override

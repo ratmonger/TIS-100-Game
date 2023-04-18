@@ -91,11 +91,13 @@ public class Main extends Application {
         for (int i = 0; i < location.length; i++) {
             for (int j = 0; j < location[0].length; j++) {
                 if (location[i][j].equals("port")) {
-                    objects[i][j] = new Port(i,j);
+                    objects[i][j] = new Port(i,j, location.length,
+                                             location[0].length);
                     elements[i][j] = objects[i][j];
                 }
                 if (location[i][j].equals("inpt")) {
-                    objects[i][j] = new InputPort(i , j);
+                    objects[i][j] = new InputPort(i,j, location.length,
+                                                  location[0].length);
                     if (i == 0 || j == location[0].length -1) {
                         objects[i][j].getInQueue()
                                 .addAll(parcer.getinputs()[i][j]);
@@ -117,7 +119,8 @@ public class Main extends Application {
 
                 }
                 if (location[i][j].equals("oupt")) {
-                    objects[i][j] = new OutPort(i, j);
+                    objects[i][j] = new OutPort(i,j, location.length,
+                                                location[0].length);
                     elements[i][j] = objects[i][j];
 
                     TextArea output = new TextArea("output");

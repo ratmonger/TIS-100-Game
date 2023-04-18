@@ -18,8 +18,10 @@ public class Port implements Runnable, Component {
     private final BlockingQueue<Integer> outQueue;
     private int rowOffset;
     private int colOffset;
+    private int rows;
+    private int cols;
 
-    public Port(int x, int y) {
+    public Port(int x, int y, int rows, int cols) {
         rowOffset = x;
         colOffset = y;
         this.inQueue = new LinkedBlockingQueue<>();

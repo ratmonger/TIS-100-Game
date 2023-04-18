@@ -67,7 +67,14 @@ public class Main extends Application {
                 }
                 if (location[i][j].equals("inpt")) {
                     objects[i][j] = new InputPort(i % 2);
-                    objects[i][j].getInQueue().addAll(parcer.getinputs()[i][j]);
+                    if (i == 0 || j == location[0].length -1) {
+                        objects[i][j].getInQueue()
+                                .addAll(parcer.getinputs()[i][j]);
+                    } else {
+                        objects[i][j].getOutQueue()
+                                .addAll(parcer.getinputs()[i][j]);
+
+                    }
                     elements[i][j] = objects[i][j];
 
                     TextArea input = new TextArea("input\n");

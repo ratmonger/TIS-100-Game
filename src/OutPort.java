@@ -54,15 +54,17 @@ public class OutPort extends Port {
 
         if (this.getRowOffset() == 0) {//// fix this and read from here
             HBox hbox2 = new HBox();
+            hbox2.setSpacing(5);
             hbox2.setAlignment(Pos.CENTER);
             vbox.getChildren().add(hbox2);
             hbox2.getChildren().add(UpArrow(0, 0));
-            hbox2.getChildren().add(in);
+            hbox2.getChildren().add(out);
         }
 
         if (this.getRowOffset() == this.getRows()-1) {
 
             HBox hbox2 = new HBox();
+            hbox2.setSpacing(5);
             hbox2.setAlignment(Pos.CENTER);
             vbox.getChildren().add(hbox2);
             hbox2.getChildren().add(in);
@@ -70,14 +72,15 @@ public class OutPort extends Port {
         }
 
         if (this.getColOffset() == 0) {
-            System.out.println("SURELY???");
-            vbox.getChildren().add(out);
+            vbox.setSpacing(5);
+            vbox.getChildren().add(in);
             vbox.getChildren().add(LeftArrow(0, 0));
         }
 
         if (this.getColOffset() == this.getCols() - 1) {
+            vbox.setSpacing(5);
             vbox.getChildren().add(RightArrow(0, 0));
-            vbox.getChildren().add(in);
+            vbox.getChildren().add(out);
         }
 
 

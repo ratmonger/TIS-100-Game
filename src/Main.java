@@ -16,6 +16,7 @@ import java.util.concurrent.CountDownLatch;
 
 public class Main extends Application {
     Scene scene;
+
     public static void main(String[] args) {
         launch(args);
     }
@@ -27,7 +28,7 @@ public class Main extends Application {
         Label name = new Label("TIS 101");
         Button butt = new Button("Start");
         VBox vbox0 = new VBox();
-        vbox0.getChildren().addAll(name,butt);
+        vbox0.getChildren().addAll(name, butt);
         vbox0.setAlignment(Pos.CENTER);
         home.setAlignment(Pos.CENTER);
         home.getChildren().add(vbox0);
@@ -37,7 +38,7 @@ public class Main extends Application {
         primaryStage.show();
     }
 
-    public void createroot(){
+    public void createroot() {
         BorderPane root = new BorderPane();
         scene.setRoot(root);
         root.getChildren().clear();
@@ -54,7 +55,7 @@ public class Main extends Application {
         VBox outbox = new VBox();
         outbox.setAlignment(Pos.CENTER);
         inbox.setAlignment(Pos.CENTER);
-        inout.getChildren().addAll(inbox,outbox);
+        inout.getChildren().addAll(inbox, outbox);
         vbox1.getChildren().add(inout);
         vbox1.setSpacing(10);
         inbox.setSpacing(10);
@@ -91,14 +92,14 @@ public class Main extends Application {
         for (int i = 0; i < location.length; i++) {
             for (int j = 0; j < location[0].length; j++) {
                 if (location[i][j].equals("port")) {
-                    objects[i][j] = new Port(i,j, location.length,
+                    objects[i][j] = new Port(i, j, location.length,
                                              location[0].length);
                     elements[i][j] = objects[i][j];
                 }
                 if (location[i][j].equals("inpt")) {
-                    objects[i][j] = new InputPort(i,j, location.length,
+                    objects[i][j] = new InputPort(i, j, location.length,
                                                   location[0].length);
-                    if (i == 0 || j == location[0].length -1) {
+                    if (i == 0 || j == location[0].length - 1) {
                         objects[i][j].getInQueue()
                                 .addAll(parcer.getinputs()[i][j]);
                     } else {
@@ -110,7 +111,7 @@ public class Main extends Application {
 
                     TextArea input = new TextArea("input\n");
                     input.setEditable(false);
-                    input.setPrefSize(50,200);
+                    input.setPrefSize(50, 200);
 
                     for (Object s : parcer.getinputs()[i][j]) {
                         input.appendText(s + "\n");
@@ -119,15 +120,15 @@ public class Main extends Application {
 
                 }
                 if (location[i][j].equals("oupt")) {
-                    objects[i][j] = new OutPort(i,j, location.length,
+                    objects[i][j] = new OutPort(i, j, location.length,
                                                 location[0].length);
                     elements[i][j] = objects[i][j];
 
                     TextArea output = new TextArea("output");
                     output.setEditable(false);
-                    output.setPrefSize(50,200);
-                    output.setMaxSize(50,200);
-                    output.setMinSize(50,200);
+                    output.setPrefSize(50, 200);
+                    output.setMaxSize(50, 200);
+                    output.setMinSize(50, 200);
                     outbox.getChildren().addAll(output);
 
                 }
@@ -138,10 +139,10 @@ public class Main extends Application {
             for (int j = 0; j < location[0].length; j++) {
                 if (location[i][j].equals("silo")) {
                     Interpreter interp = new Interpreter((objects[i - 1][j]),
-                            objects[i + 1][j],
-                            objects[i][j - 1],
-                            objects[i][j + 1],
-                            latch, counter);
+                                                         objects[i + 1][j],
+                                                         objects[i][j - 1],
+                                                         objects[i][j + 1],
+                                                         latch, counter);
                     Thread silo = new Thread(interp);
                     elements[i][j] = new Silo(silo, interp);//pass thread and
                     // interp to new silo class
@@ -206,7 +207,13 @@ public class Main extends Application {
                     outer++;
                 }
                 if (location[i][j].equals("inpt")) {
-                    grid.add(new Label("inpt"), j, i);
+                    if (elements[i][j] != null) {
+                        BorderPane temp = elements[i][j].toGUI();
+                        grid.add(temp, j, i);
+                    } else {
+                        HBox temp = new HBox();
+                        grid.add(temp, j, i);
+                    }
 
 
                 }
@@ -221,7 +228,6 @@ public class Main extends Application {
                 }
             }
         }
-
 
 
     }

@@ -4,7 +4,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-import java.util.concurrent.LinkedBlockingQueue;
 
 public class OutPort extends Port {
 
@@ -52,20 +51,36 @@ public class OutPort extends Port {
         if (getOutQueue().peek() != null){
             out.setText(String.valueOf(getOutQueue().peek()));}
 
+
         if (this.getRowOffset() == 0) {//// fix this and read from here
-            vbox.getChildren().add(out);
-            vbox.getChildren().add(RightArrow(0, 0));
-            vbox.getChildren().add(LeftArrow(0, 0));
-            vbox.getChildren().add(in);
-        } else {
             HBox hbox2 = new HBox();
             hbox2.setAlignment(Pos.CENTER);
             vbox.getChildren().add(hbox2);
-            hbox2.getChildren().add(out);
             hbox2.getChildren().add(UpArrow(0, 0));
-            hbox2.getChildren().add(DownArrow(0, 0));
             hbox2.getChildren().add(in);
         }
+
+        if (this.getRowOffset() == this.getRows()-1) {
+
+            HBox hbox2 = new HBox();
+            hbox2.setAlignment(Pos.CENTER);
+            vbox.getChildren().add(hbox2);
+            hbox2.getChildren().add(in);
+            hbox2.getChildren().add(DownArrow(0, 0));
+        }
+
+        if (this.getColOffset() == 0) {
+            System.out.println("SURELY???");
+            vbox.getChildren().add(out);
+            vbox.getChildren().add(LeftArrow(0, 0));
+        }
+
+        if (this.getColOffset() == this.getCols() - 1) {
+            vbox.getChildren().add(RightArrow(0, 0));
+            vbox.getChildren().add(in);
+        }
+
+
         hbox.getChildren().add(vbox);
         BorderPane temp = new BorderPane(hbox);
         return temp;

@@ -207,9 +207,17 @@ public class Main extends Application {
                 }
                 if (location[i][j].equals("inpt")) {
                     grid.add(new Label("inpt"), j, i);
+
+
                 }
                 if (location[i][j].equals("oupt")) {
-                    grid.add(new Label("oupt"), j, i);
+                    if (elements[i][j] != null) {
+                        BorderPane temp = elements[i][j].toGUI();
+                        grid.add(temp, j, i);
+                    } else {
+                        HBox temp = new HBox();
+                        grid.add(temp, j, i);
+                    }
                 }
             }
         }

@@ -1,7 +1,6 @@
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Background;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -22,8 +21,10 @@ public class Port implements Runnable, Component {
     private int cols;
 
     public Port(int x, int y, int rows, int cols) {
-        rowOffset = x;
-        colOffset = y;
+        this.rowOffset = x;
+        this.colOffset = y;
+        this.rows = rows;
+        this.cols = cols;
         this.inQueue = new LinkedBlockingQueue<>();
         this.outQueue = new LinkedBlockingQueue<>();
     }
@@ -39,10 +40,21 @@ public class Port implements Runnable, Component {
         return outQueue.poll();
     }
 
-    // if 0, port is located above/below silos
-    // if 1, port is left/right of silo
+
     public int getRowOffset() {
         return rowOffset;
+    }
+
+    public int getColOffset(){
+        return colOffset;
+    }
+
+    public int getRows(){
+        return rows;
+    }
+
+    public int getCols(){
+        return cols;
     }
 
 

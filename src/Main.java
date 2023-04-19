@@ -18,6 +18,7 @@ import java.util.concurrent.CountDownLatch;
 
 public class Main extends Application {
     private Scene scene;
+    private Parcer parcer;
 
     public static void main(String[] args) {
         launch(args);
@@ -25,9 +26,13 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        this.parcer = new Parcer();
 
         StackPane home = new StackPane();
-        scene = new Scene(home, 800, 800);
+        scene = new Scene(home);
+        primaryStage.setResizable(true);
+        primaryStage.setMaximized(true);
+        primaryStage.setScene(scene);
         Label name = new Label("TIS 101");
         Button butt = new Button("Run Program");
         VBox vbox0 = new VBox();
@@ -39,7 +44,7 @@ public class Main extends Application {
         butt.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                Display display = new Display(scene);
+                Display display = new Display(scene, parcer);
 
             }
         });

@@ -115,7 +115,7 @@ public class Parcer {
                 break;
             }
         }
-        System.out.println(queue);
+        //System.out.println(queue);
         row = 2*row+1;
         col = 2*col+1;
         if(row==-1)

@@ -27,7 +27,7 @@ public class Display {
     private List<List> instruct;
     Parcer parcer;
 
-    public Display(Scene scene) {
+    public Display(Scene scene, Parcer parcer) {
 
         this.root = new BorderPane();
         this.scene = scene;
@@ -69,7 +69,7 @@ public class Display {
 
 
         int counter = 0;
-        this.parcer = new Parcer();
+        this.parcer = parcer;
         location = parcer.getarray();
         int size = parcer.getRows() * parcer.getCols();
         this.instruct = parcer.getinstruct();

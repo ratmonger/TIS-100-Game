@@ -23,4 +23,10 @@ public class Silo implements Component{
     public void startSilo(){
         siloThread.start();
     }
+    public void pauseSilo(){
+        interp.pause();
+    }
+    public void resumesilo(){
+        interp.resume();
+    }
 }

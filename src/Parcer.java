@@ -71,6 +71,7 @@ public class Parcer {
                     line = input.nextLine();
                 }
                 instruct.add(parts);
+
                 try {
                     line = input.nextLine();
                 } catch (NoSuchElementException e) {
@@ -114,6 +115,7 @@ public class Parcer {
                 break;
             }
         }
+        System.out.println(queue);
         row = 2*row+1;
         col = 2*col+1;
         if(row==-1)

@@ -121,8 +121,18 @@ public class Display {
                 }
             }
         }
+        Boolean[] firstime = {true};
+        start.setOnAction(e -> {
+            if(firstime[0]) {
+                startAllSilo();
+                firstime[0] =false;
+            }
+            resumesilos();
+                }
+        );
+        pause.setOnAction(e -> stopALLsilos());
 
-        start.setOnAction(e -> startAllSilo());
+
         for (int i = 0; i < location.length; i++) {
             for (int j = 0; j < location[0].length; j++) {
                 if (location[i][j].equals("silo")) {
@@ -322,6 +332,24 @@ public class Display {
             }
         }
         startTimer();
+    }
+    public void stopALLsilos() {
+        for (int i = 0; i < location.length; i++) {
+            for (int j = 0; j < location[0].length; j++) {
+                if (location[i][j].equals("silo")) {
+                    ((Silo) elements[i][j]).pauseSilo();
+                }
+            }
+        }
+    }
+    public void resumesilos() {
+        for (int i = 0; i < location.length; i++) {
+            for (int j = 0; j < location[0].length; j++) {
+                if (location[i][j].equals("silo")) {
+                    ((Silo) elements[i][j]).resumesilo();
+                }
+            }
+        }
     }
 
 

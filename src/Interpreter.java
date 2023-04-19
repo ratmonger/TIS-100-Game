@@ -11,6 +11,7 @@ public class Interpreter implements Runnable {
     private Port rightPort;
     static int counter = 0;
     private final CountDownLatch latch;
+    private volatile boolean isRunning = false;
     int index = 0;
     int count = 0;
 
@@ -30,6 +31,15 @@ public class Interpreter implements Runnable {
     public void run() {
         Parcer parcer = new Parcer();
         while (true) {
+            synchronized (this) {
+                while (!isRunning) {
+                    try {
+                        this.wait(); // Wait until the flag is set to true
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            }
             if (count > parcer.getinstruct().get(index).size() - 1)
                 count = 0;
 
@@ -252,8 +262,15 @@ public class Interpreter implements Runnable {
                 srcint = Integer.parseInt(src);
         }
         return srcint;
-
-
+    }
+    public void pause() {
+        isRunning = false;
+    }
+    public void resume() {
+        isRunning = true;
+        synchronized (this) {
+            this.notifyAll();
+        }
     }
 
 

@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import java.util.List;
@@ -29,14 +30,23 @@ public class Main extends Application {
         this.parcer = new Parcer();
 
         StackPane home = new StackPane();
+        home.setBackground(Background.fill(Color.rgb(23, 23, 23)));
         scene = new Scene(home);
         primaryStage.setResizable(true);
         primaryStage.setMaximized(true);
         primaryStage.setScene(scene);
         Label name = new Label("TIS 101");
         Button butt = new Button("Run Program");
+
+        name.setFont(new Font("Courier New", 100));
+        name.setMinSize(100,5);
+        name.setTextFill(Color.WHITE);
+        BorderPane fillBox = new BorderPane();
+        fillBox.setMinSize(40,80);
+
+
         VBox vbox0 = new VBox();
-        vbox0.getChildren().addAll(name, butt);
+        vbox0.getChildren().addAll(name,fillBox, butt);
         vbox0.setAlignment(Pos.CENTER);
         home.setAlignment(Pos.CENTER);
         home.getChildren().add(vbox0);

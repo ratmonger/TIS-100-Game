@@ -5,6 +5,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 
@@ -122,15 +123,26 @@ public class Display {
             }
         }
         Boolean[] firstime = {true};
+        Boolean[] istep = {false};
         start.setOnAction(e -> {
             if(firstime[0]) {
                 startAllSilo();
                 firstime[0] =false;
             }
             resumesilos();
+            istep[0]=false;
+            pause.setText("pause");
                 }
         );
-        pause.setOnAction(e -> stopALLsilos());
+
+        pause.setOnAction(e ->{
+            if(!istep[0]) {
+                stopALLsilos();
+                pause.setText("step");
+                istep[0]=true;
+            }
+            }
+        );
 
 
         for (int i = 0; i < location.length; i++) {

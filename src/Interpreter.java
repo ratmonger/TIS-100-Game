@@ -30,6 +30,8 @@ public class Interpreter implements Runnable {
         this.rightPort = rightPort;
         this.latch = latch;
         this.index = index;
+        this.ACC = 0;
+        this.BAK = 0;
 
     }
 
@@ -41,6 +43,13 @@ public class Interpreter implements Runnable {
         return this.count;
     }
 
+    public int getACC(){
+        return ACC;
+    }
+
+    public int getBAK(){
+        return BAK;
+    }
 
     @Override
     public void run() {

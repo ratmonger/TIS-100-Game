@@ -217,22 +217,7 @@ public class Display {
 
                 }
                 if (location[i][j].equals("silo")) {
-                    TextArea sil = new TextArea();
-                    sil.setFont(new Font("Courier New Bold", 12));
-
-                    List<String> texts = instruct.get(outer);
-                    for (String s : texts) {
-                        sil.appendText(s + "\n");
-                    }
-                    sil.setPrefSize(120, 120);
-                    grid.add(sil, j, i);
-                    String text = sil.getText();
-                    int endIndex = text.indexOf("\n");
-                    sil.setStyle(
-                            "-fx-highlight-fill: black; " +
-                                    "-fx-highlight-text-fill: white;");
-
-                    sil.selectRange(0, endIndex);
+                    grid.add(elements[i][j].toGUI(), j, i);
                     outer++;
                 }
                 if (location[i][j].equals("inpt")) {
@@ -301,28 +286,8 @@ public class Display {
 
                             }
                             if (location[i][j].equals("silo")) {
-                                Silo tempSilo = (Silo) elements[i][j];
-                                TextArea sil = new TextArea();
-                                sil.setFont(new Font("Courier New Bold", 12));
 
-                                ArrayList<String> texts =
-                                        tempSilo.getSiloCommands();
-                                for (String s : texts) {
-                                    sil.appendText(s + "\n");
-                                }
-                                sil.setPrefSize(120, 120);
-                                grid.add(sil, j, i);
-                                String text = sil.getText();
-                                int endIndex = text.indexOf("\n");
-                                sil.setStyle(
-                                        "-fx-highlight-fill: black; " +
-                                                "-fx-highlight-text-fill: white;");
-                                // THIS IS WHERE WE WILL HIGHLIGHT
-                                // WE NEED TO GET THE RANGE HERE
-                                // WRITE A SILO METHOD THAT RETURNS THE RANGE!
-
-                                int[] range = tempSilo.getCommandRange();
-                                sil.selectRange(range[0], range[1]);
+                                grid.add(elements[i][j].toGUI(), j, i);
                                 outer++;
                             }
                             if (location[i][j].equals("inpt")) {

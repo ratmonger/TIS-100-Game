@@ -3,6 +3,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Paint;
 
 
 public class OutPort extends Port {
@@ -48,6 +49,8 @@ public class OutPort extends Port {
         if (getInQueue().peek() != null){
             in.setText(String.valueOf(getInQueue().peek()));}
         Label out = new Label();
+        out.setTextFill(Paint.valueOf("YELLOW"));
+        in.setTextFill(Paint.valueOf("YELLOW"));
         if (getOutQueue().peek() != null){
             out.setText(String.valueOf(getOutQueue().peek()));}
 

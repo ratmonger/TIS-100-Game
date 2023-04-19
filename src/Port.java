@@ -5,6 +5,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 
@@ -106,6 +107,8 @@ public class Port implements Runnable, Component {
         if (getInQueue().peek() != null){
             in.setText(String.valueOf(getInQueue().peek()));}
         Label out = new Label();
+        out.setTextFill(Paint.valueOf("YELLOW"));
+        in.setTextFill(Paint.valueOf("YELLOW"));
         if (getOutQueue().peek() != null){
             out.setText(String.valueOf(getOutQueue().peek()));}
 

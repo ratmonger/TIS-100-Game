@@ -49,6 +49,11 @@ public class Main extends Application {
             }
         });
 
+        primaryStage.setOnCloseRequest(event -> {
+            System.out.println("Program is closing");
+            System.exit(1);
+            // Save file
+        });
 
         primaryStage.setTitle("Silos");
         primaryStage.setScene(scene);

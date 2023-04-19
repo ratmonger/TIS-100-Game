@@ -22,6 +22,7 @@ public class Display {
     VBox inbox;
     VBox outbox;
     private long startTime;
+    private List<List> instruct;
 
     public Display(Scene scene) {
 
@@ -68,7 +69,7 @@ public class Display {
         Parcer parcer = new Parcer();
         location = parcer.getarray();
         int size = parcer.getRows() * parcer.getCols();
-        List<List> instruct = parcer.getinstruct();
+        this.instruct = parcer.getinstruct();
         Port[][] objects = new Port[location.length][location[0].length];
         this.elements = new Component[location.length][location[0].length];
         // array containing ALL components
@@ -237,8 +238,65 @@ public class Display {
                                     finishTime - startTime);
                     float elapsed = (float) time / 1000;
                     if (elapsed > 1) {
-                        // can modify this to call an update on gui here
-                        // or anywhere in the handle
+                        grid.getChildren().clear();
+
+                        int outer = 0;
+                        for (int i = 0; i < location.length; i++) {
+                            for (int j = 0; j < location[0].length; j++) {
+
+                                if (location[i][j].equals("port")) {
+
+                                    Label port = new Label("port");
+                                    port.setAlignment(Pos.BASELINE_CENTER);
+                                    //grid.add(port, j, i);
+                                    if (elements[i][j] != null) {
+                                        BorderPane temp = elements[i][j].toGUI();
+                                        grid.add(temp, j, i);
+                                    } else {
+                                        HBox temp = new HBox();
+                                        grid.add(temp, j, i);
+                                    }
+
+                                }
+                                if (location[i][j].equals("silo")) {
+                                    TextArea sil = new TextArea();
+
+                                    List<String> texts = instruct.get(outer);
+                                    for (String s : texts) {
+                                        sil.appendText(s + "\n");
+                                    }
+                                    sil.setPrefSize(120, 120);
+                                    grid.add(sil, j, i);
+                                    String text = sil.getText();
+                                    int endIndex = text.indexOf("\n");
+                                    sil.setStyle(
+                                            "-fx-highlight-fill: lightgray; " +
+                                                    "-fx-highlight-text-fill: black;");
+                                    sil.selectRange(0, endIndex);
+                                    outer++;
+                                }
+                                if (location[i][j].equals("inpt")) {
+                                    if (elements[i][j] != null) {
+                                        BorderPane temp = elements[i][j].toGUI();
+                                        grid.add(temp, j, i);
+                                    } else {
+                                        HBox temp = new HBox();
+                                        grid.add(temp, j, i);
+                                    }
+
+
+                                }
+                                if (location[i][j].equals("oupt")) {
+                                    if (elements[i][j] != null) {
+                                        BorderPane temp = elements[i][j].toGUI();
+                                        grid.add(temp, j, i);
+                                    } else {
+                                        HBox temp = new HBox();
+                                        grid.add(temp, j, i);
+                                    }
+                                }
+                            }
+                        }
 
                     }
 
@@ -263,6 +321,7 @@ public class Display {
                 }
             }
         }
+        startTimer();
     }
 
 

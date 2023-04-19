@@ -28,6 +28,7 @@ public class Display {
     private ArrayList<ArrayList<String>> instruct;
     Parcer parcer;
 
+
     public Display(Scene scene, Parcer parcer) {
 
         this.root = new BorderPane();
@@ -35,12 +36,10 @@ public class Display {
         this.scene.setRoot(this.root);
         root.getChildren().clear();
         root.setBackground(Background.fill(Color.rgb(23, 23, 23)));
-
         this.grid = new GridPane();
         grid.setHgap(10);
         grid.setVgap(10);
         HBox inout = new HBox();
-
         grid.setAlignment(Pos.CENTER_RIGHT);
         VBox vbox1 = new VBox();
         this.inbox = new VBox();
@@ -159,6 +158,10 @@ public class Display {
                     }
                 }
         );
+        halt.setOnAction(e ->{
+            new Display(scene,parcer);
+                }
+        );
 
 
         for (int i = 0; i < location.length; i++) {
@@ -242,8 +245,8 @@ public class Display {
                 }
             }
         }
-
     }
+
 
 
     public void startTimer() {

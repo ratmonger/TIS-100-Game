@@ -37,6 +37,7 @@ public class Main extends Application {
         primaryStage.setScene(scene);
         Label name = new Label("TIS 101");
         Button butt = new Button("Run Program");
+        butt.setFont(new Font("Courier New Bold", 16));
 
         name.setFont(new Font("Courier New", 100));
         name.setMinSize(100,5);

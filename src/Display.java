@@ -8,6 +8,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,9 +54,12 @@ public class Display {
         inout.setSpacing(10);
         outbox.setSpacing(10);
         HBox hbox2 = new HBox();
-        Button start = new Button("start");
-        Button pause = new Button("pause");
+        Button start = new Button("Start");
+        start.setFont(new Font("Courier New Bold", 12));
+        Button pause = new Button("Pause");
+        pause.setFont(new Font("Courier New Bold", 12));
         Button halt = new Button("Halt");
+        halt.setFont(new Font("Courier New Bold", 12));
         start.setAlignment(Pos.BOTTOM_CENTER);
         hbox2.setSpacing(10);
         hbox2.getChildren().addAll(halt, pause, start);
@@ -100,8 +104,9 @@ public class Display {
                     elements[i][j] = objects[i][j];
 
                     TextArea input = new TextArea("input\n");
+                    input.setFont(new Font("Courier New Bold", 12));
                     input.setEditable(false);
-                    input.setPrefSize(50, 200);
+                    input.setPrefSize(55, 200);
 
                     for (Object s : parcer.getinputs()[i][j]) {
                         input.appendText(s + "\n");
@@ -115,10 +120,12 @@ public class Display {
                     elements[i][j] = objects[i][j];
 
                     TextArea output = new TextArea("output");
+                    output.setFont(new Font("Courier New Bold",
+                                            12));
                     output.setEditable(false);
-                    output.setPrefSize(50, 200);
-                    output.setMaxSize(55, 200);
-                    output.setMinSize(55, 200);
+                    output.setPrefSize(60, 200);
+                    output.setMaxSize(60, 200);
+                    output.setMinSize(60, 200);
                     outbox.getChildren().addAll(output);
 
                 }
@@ -211,7 +218,8 @@ public class Display {
                 }
                 if (location[i][j].equals("silo")) {
                     TextArea sil = new TextArea();
-                    ;
+                    sil.setFont(new Font("Courier New Bold", 12));
+
                     List<String> texts = instruct.get(outer);
                     for (String s : texts) {
                         sil.appendText(s + "\n");
@@ -221,8 +229,8 @@ public class Display {
                     String text = sil.getText();
                     int endIndex = text.indexOf("\n");
                     sil.setStyle(
-                            "-fx-highlight-fill: lightgray; " +
-                                    "-fx-highlight-text-fill: black;");
+                            "-fx-highlight-fill: black; " +
+                                    "-fx-highlight-text-fill: white;");
 
                     sil.selectRange(0, endIndex);
                     outer++;
@@ -295,6 +303,7 @@ public class Display {
                             if (location[i][j].equals("silo")) {
                                 Silo tempSilo = (Silo) elements[i][j];
                                 TextArea sil = new TextArea();
+                                sil.setFont(new Font("Courier New Bold", 12));
 
                                 ArrayList<String> texts =
                                         tempSilo.getSiloCommands();
@@ -306,8 +315,8 @@ public class Display {
                                 String text = sil.getText();
                                 int endIndex = text.indexOf("\n");
                                 sil.setStyle(
-                                        "-fx-highlight-fill: lightgray; " +
-                                                "-fx-highlight-text-fill: black;");
+                                        "-fx-highlight-fill: black; " +
+                                                "-fx-highlight-text-fill: white;");
                                 // THIS IS WHERE WE WILL HIGHLIGHT
                                 // WE NEED TO GET THE RANGE HERE
                                 // WRITE A SILO METHOD THAT RETURNS THE RANGE!
@@ -326,8 +335,9 @@ public class Display {
                                 }
 
                                 TextArea input = new TextArea("input\n");
+                                input.setFont(new Font("Courier New Bold", 12));
                                 input.setEditable(false);
-                                input.setPrefSize(50, 200);
+                                input.setPrefSize(55, 200);
 
                                 for (Object s :
                                         parcer.getinputs()[i][j]) {
@@ -343,9 +353,12 @@ public class Display {
                                     grid.add(temp, j, i);
                                     TextArea output = new TextArea("output");
                                     output.setEditable(false);
-                                    output.setPrefSize(50, 200);
-                                    output.setMaxSize(55, 200);
-                                    output.setMinSize(55, 200);
+                                    output.setPrefSize(60, 200);
+                                    output.setMaxSize(60, 200);
+                                    output.setMinSize(60, 200);
+
+                                    output.setFont(new Font("Courier New Bold",
+                                                          12));
                                     outbox.getChildren().addAll(output);
                                     ArrayList<Integer> temp1 =
                                             getList((OutPort) elements[i][j]);

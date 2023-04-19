@@ -8,6 +8,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
 
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -107,8 +108,12 @@ public class Port implements Runnable, Component {
         if (getInQueue().peek() != null){
             in.setText(String.valueOf(getInQueue().peek()));}
         Label out = new Label();
-        out.setTextFill(Paint.valueOf("YELLOW"));
-        in.setTextFill(Paint.valueOf("YELLOW"));
+        out.setTextFill(Paint.valueOf("WHITE"));
+        in.setTextFill(Paint.valueOf("WHITE"));
+        out.setFont(new Font("Courier New Bold",
+                             12));
+        in.setFont(new Font("Courier New Bold",
+                            12));
         if (getOutQueue().peek() != null){
             out.setText(String.valueOf(getOutQueue().peek()));}
 

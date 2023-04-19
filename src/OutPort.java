@@ -4,6 +4,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
+import javafx.scene.text.Font;
 
 import java.util.ArrayList;
 
@@ -71,8 +72,12 @@ public class OutPort extends Port {
 
         }
         Label out = new Label();
-        out.setTextFill(Paint.valueOf("YELLOW"));
-        in.setTextFill(Paint.valueOf("YELLOW"));
+        out.setTextFill(Paint.valueOf("WHITE"));
+        in.setTextFill(Paint.valueOf("WHITE"));
+        out.setFont(new Font("Courier New Bold",
+                              12));
+        in.setFont(new Font("Courier New Bold",
+                            12));
         if (getOutQueue().peek() != null) {
             out.setText(String.valueOf(getOutQueue().peek()));
         }

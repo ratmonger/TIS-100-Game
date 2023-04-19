@@ -11,7 +11,8 @@ public class Parcer {
      */
     String word;
 
-    static List<List> instruct = new ArrayList<List>();
+    static ArrayList<ArrayList<String>> instruct =
+            new ArrayList<ArrayList<String>>();
 
     static String[][] newArray;
     static Queue[][] inputs;
@@ -65,7 +66,7 @@ public class Parcer {
             String line = input.nextLine();
             line = input.nextLine();
             while(!line.equals("INPUT")&&!line.equals("OUTPUT")){
-                List<String> parts = new ArrayList<String>();
+                ArrayList<String> parts = new ArrayList<String>();
                 while(!line.equals("END")){
                     parts.add(line);
                     line = input.nextLine();
@@ -186,7 +187,7 @@ public class Parcer {
     }
 
 
-    public List<List> getinstruct(){
+    public ArrayList<ArrayList<String>> getinstruct(){
         return instruct;
     }
     public String[][] getarray(){

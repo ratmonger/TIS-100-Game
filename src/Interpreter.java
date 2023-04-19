@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.CountDownLatch;
 
@@ -14,11 +16,14 @@ public class Interpreter implements Runnable {
     private volatile boolean isRunning = false;
     private volatile boolean isStep = false;
     int index = 0;
-    int count = 0;
+    private int count = 0;
+    private Parcer parcer;
 
 
     public Interpreter(Port upPort, Port downPort, Port leftPort,
-                       Port rightPort, CountDownLatch latch, int index) {
+                       Port rightPort, CountDownLatch latch, int index,
+                       Parcer parcer) {
+        this.parcer = parcer;
         this.upPort = upPort;
         this.downPort = downPort;
         this.leftPort = leftPort;
@@ -28,9 +33,17 @@ public class Interpreter implements Runnable {
 
     }
 
+    public ArrayList<String> getCommands(){
+        return this.parcer.getinstruct().get(index);
+    }
+
+    public int getCount(){
+        return this.count;
+    }
+
+
     @Override
     public void run() {
-        Parcer parcer = new Parcer();
         while (true) {
             synchronized (this) {
                 while (!isRunning) {

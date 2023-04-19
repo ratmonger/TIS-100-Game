@@ -24,7 +24,7 @@ public class Display {
     VBox inbox;
     VBox outbox;
     private long startTime;
-    private List<List> instruct;
+    private ArrayList<ArrayList<String>> instruct;
     Parcer parcer;
 
     public Display(Scene scene, Parcer parcer) {
@@ -161,7 +161,7 @@ public class Display {
                             objects[i + 1][j],
                             objects[i][j - 1],
                             objects[i][j + 1],
-                            latch, counter);
+                            latch, counter, parcer);
                     Thread silo = new Thread(interp);
                     elements[i][j] = new Silo(silo, interp);//pass thread and
                     // interp to new silo class
@@ -223,6 +223,7 @@ public class Display {
                     sil.setStyle(
                             "-fx-highlight-fill: lightgray; " +
                                     "-fx-highlight-text-fill: black;");
+
                     sil.selectRange(0, endIndex);
                     outer++;
                 }
@@ -292,9 +293,11 @@ public class Display {
 
                             }
                             if (location[i][j].equals("silo")) {
+                                Silo tempSilo = (Silo) elements[i][j];
                                 TextArea sil = new TextArea();
 
-                                List<String> texts = instruct.get(outer);
+                                ArrayList<String> texts =
+                                        tempSilo.getSiloCommands();
                                 for (String s : texts) {
                                     sil.appendText(s + "\n");
                                 }
@@ -305,7 +308,12 @@ public class Display {
                                 sil.setStyle(
                                         "-fx-highlight-fill: lightgray; " +
                                                 "-fx-highlight-text-fill: black;");
-                                sil.selectRange(0, endIndex);
+                                // THIS IS WHERE WE WILL HIGHLIGHT
+                                // WE NEED TO GET THE RANGE HERE
+                                // WRITE A SILO METHOD THAT RETURNS THE RANGE!
+
+                                int[] range = tempSilo.getCommandRange();
+                                sil.selectRange(range[0], range[1]);
                                 outer++;
                             }
                             if (location[i][j].equals("inpt")) {
@@ -373,6 +381,8 @@ public class Display {
         return o.getOutputInts();
 
     }
+
+
 
 
 

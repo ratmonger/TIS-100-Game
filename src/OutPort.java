@@ -5,17 +5,30 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 
+import java.util.ArrayList;
+
 
 public class OutPort extends Port {
 
 
-    public OutPort(int x, int y, int a, int b){
-        super(x, y, a,b);
+    public OutPort(int x, int y, int a, int b) {
+        super(x, y, a, b);
 
     }
 
+    private ArrayList<Integer> outputInts = new ArrayList<Integer>();
+
     @Override
     public BorderPane toGUI() {
+
+        if (getInQueue().peek() != null) {
+            outputInts.add(getInQueue().poll());
+        }
+        if (getOutQueue().peek() != null) {
+            outputInts.add(getOutQueue().poll());
+        }
+
+
 
         /*
         in
@@ -46,13 +59,17 @@ public class OutPort extends Port {
         hbox.setAlignment(Pos.CENTER);
         vbox.setAlignment(Pos.CENTER);
         Label in = new Label();
-        if (getInQueue().peek() != null){
-            in.setText(String.valueOf(getInQueue().peek()));}
+        if (outputInts.size() > 0) {
+
+            in.setText(String.valueOf(outputInts.get(outputInts.size() - 1)));
+
+        }
         Label out = new Label();
         out.setTextFill(Paint.valueOf("YELLOW"));
         in.setTextFill(Paint.valueOf("YELLOW"));
-        if (getOutQueue().peek() != null){
-            out.setText(String.valueOf(getOutQueue().peek()));}
+        if (getOutQueue().peek() != null) {
+            out.setText(String.valueOf(getOutQueue().peek()));
+        }
 
 
         if (this.getRowOffset() == 0) {//// fix this and read from here
@@ -64,7 +81,7 @@ public class OutPort extends Port {
             hbox2.getChildren().add(out);
         }
 
-        if (this.getRowOffset() == this.getRows()-1) {
+        if (this.getRowOffset() == this.getRows() - 1) {
 
             HBox hbox2 = new HBox();
             hbox2.setSpacing(5);

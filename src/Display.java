@@ -9,6 +9,7 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
@@ -24,6 +25,7 @@ public class Display {
     VBox outbox;
     private long startTime;
     private List<List> instruct;
+    Parcer parcer;
 
     public Display(Scene scene) {
 
@@ -67,7 +69,7 @@ public class Display {
 
 
         int counter = 0;
-        Parcer parcer = new Parcer();
+        this.parcer = new Parcer();
         location = parcer.getarray();
         int size = parcer.getRows() * parcer.getCols();
         this.instruct = parcer.getinstruct();
@@ -261,6 +263,8 @@ public class Display {
                     float elapsed = (float) time / 1000;
                     if (elapsed > 1) {
                         grid.getChildren().clear();
+                        outbox.getChildren().clear();
+                        inbox.getChildren().clear();
 
                         int outer = 0;
                         for (int i = 0; i < location.length; i++) {
@@ -306,16 +310,43 @@ public class Display {
                                         grid.add(temp, j, i);
                                     }
 
+                                    TextArea input = new TextArea("input\n");
+                                    input.setEditable(false);
+                                    input.setPrefSize(50, 200);
+
+                                    for (Object s :
+                                            parcer.getinputs()[i][j]) {
+                                        input.appendText(s + "\n");
+                                    }
+                                    inbox.getChildren().addAll(input);
+
 
                                 }
                                 if (location[i][j].equals("oupt")) {
                                     if (elements[i][j] != null) {
                                         BorderPane temp = elements[i][j].toGUI();
                                         grid.add(temp, j, i);
+                                        TextArea output = new TextArea("output");
+                                        output.setEditable(false);
+                                        output.setPrefSize(50, 200);
+                                        output.setMaxSize(55, 200);
+                                        output.setMinSize(55, 200);
+                                        outbox.getChildren().addAll(output);
+                                        ArrayList<Integer> temp1 =
+                                                getList((OutPort) elements[i][j]);
+                                        for (Object s : temp1 ) {
+                                             output.appendText("\n" + s);
+                                        }
                                     } else {
                                         HBox temp = new HBox();
                                         grid.add(temp, j, i);
                                     }
+
+                                  //  for (Object s : temp ) {
+                                   //     output.appendText(s + "\n");
+                                    //}
+
+
                                 }
                             }
                         }
@@ -330,6 +361,11 @@ public class Display {
 
     }
 
+
+    public ArrayList<Integer> getList(OutPort o){
+        return o.getOutputInts();
+
+    }
 
 
 

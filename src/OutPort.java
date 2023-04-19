@@ -16,7 +16,13 @@ public class OutPort extends Port {
 
     }
 
-    private ArrayList<Integer> outputInts = new ArrayList<Integer>();
+    private ArrayList<Integer> outputInts = new ArrayList<Integer>(0);
+
+    public ArrayList<Integer> getOutputInts(){
+
+
+        return this.outputInts;
+    }
 
     @Override
     public BorderPane toGUI() {

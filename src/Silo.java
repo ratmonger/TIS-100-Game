@@ -40,10 +40,18 @@ public class Silo implements Component{
         sil.setPrefSize(130, 130);
         String text = sil.getText();
         sil.setStyle(
-                "-fx-highlight-fill: black; " +
-                        "-fx-highlight-text-fill: white;" +
-                        "-fx-focus-color: black ; " +
-                        "-fx-faint-focus-color: black ;");
+                "text-area-background: rgb(23, 23, 23);"+
+                        "-fx-focus-color: rgb(23, 23, 23) ; " +
+                        "-fx-faint-focus-color: rgb(23, 23, 23) ;"+
+                        "-fx-highlight-fill: rgb(23, 23, 23);" +
+                        "-fx-highlight-text-fill: white;"+
+                        "-fx-background-color: rgb(23, 23, 23);" +
+                        "-fx-control-inner-background: rgb(23, 23, 23); -fx-text-fill: white;");
+
+//        +
+//                "-fx-highlight-fill: rgb(23, 23, 23); " +
+//                "-fx-highlight-text-fill: rgb(23, 23, 23);" +
+
         sil.setBackground(Background.fill(Color.rgb(23, 23, 23)));
         // THIS IS WHERE WE WILL HIGHLIGHT
         // WE NEED TO GET THE RANGE HERE
@@ -58,7 +66,7 @@ public class Silo implements Component{
 
 
         VBox vbox = new VBox(acc,bak);
-        vbox.setSpacing(100);
+        //vbox.setSpacing(100);
 
 
         acc.setStyle(cssLayout);
@@ -72,6 +80,7 @@ public class Silo implements Component{
         HBox hbox = new HBox(sil, vbox);
         BorderPane bp = new BorderPane(hbox);
         bp.setStyle(cssLayout);
+        bp.setMinSize(200,200);
 
 
         return bp;

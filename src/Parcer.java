@@ -90,6 +90,9 @@ public class Parcer {
                 }
                 try {
                     line = input.nextLine();
+                    if (line.equals("END")){
+                        break;
+                    }
                 } catch (NoSuchElementException e) {
                     break;
                 }

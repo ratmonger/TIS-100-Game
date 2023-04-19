@@ -83,12 +83,12 @@ public class Display {
             for (int j = 0; j < location[0].length; j++) {
                 if (location[i][j].equals("port")) {
                     objects[i][j] = new Port(i, j, location.length,
-                                             location[0].length);
+                            location[0].length);
                     elements[i][j] = objects[i][j];
                 }
                 if (location[i][j].equals("inpt")) {
                     objects[i][j] = new InputPort(i, j, location.length,
-                                                  location[0].length);
+                            location[0].length);
                     if (i == 0 || j == location[0].length - 1) {
                         objects[i][j].getInQueue()
                                 .addAll(parcer.getinputs()[i][j]);
@@ -111,7 +111,7 @@ public class Display {
                 }
                 if (location[i][j].equals("oupt")) {
                     objects[i][j] = new OutPort(i, j, location.length,
-                                                location[0].length);
+                            location[0].length);
                     elements[i][j] = objects[i][j];
 
                     TextArea output = new TextArea("output");
@@ -127,23 +127,30 @@ public class Display {
         Boolean[] firstime = {true};
         Boolean[] istep = {false};
         start.setOnAction(e -> {
-            if(firstime[0]) {
-                startAllSilo();
-                firstime[0] =false;
-            }
-            resumesilos();
-            istep[0]=false;
-            pause.setText("pause");
+                    if(firstime[0]) {
+                        startAllSilo();
+                        firstime[0] =false;
+                    }
+                    resumesilos();
+                    istep[0]=false;
+                    pause.setText("pause");
                 }
         );
 
         pause.setOnAction(e ->{
-            if(!istep[0]) {
-                stopALLsilos();
-                pause.setText("step");
-                istep[0]=true;
-            }
-            }
+                    if(!istep[0]) {
+                        stopALLsilos();
+                        pause.setText("step");
+                        istep[0]=true;
+                    } else if(istep[0]){
+                        if(firstime[0]) {
+                            startAllSilo();
+                            firstime[0] =false;
+                        }
+                        stepALLsilos();
+
+                    }
+                }
         );
 
 
@@ -151,10 +158,10 @@ public class Display {
             for (int j = 0; j < location[0].length; j++) {
                 if (location[i][j].equals("silo")) {
                     Interpreter interp = new Interpreter((objects[i - 1][j]),
-                                                         objects[i + 1][j],
-                                                         objects[i][j - 1],
-                                                         objects[i][j + 1],
-                                                         latch, counter);
+                            objects[i + 1][j],
+                            objects[i][j - 1],
+                            objects[i][j + 1],
+                            latch, counter);
                     Thread silo = new Thread(interp);
                     elements[i][j] = new Silo(silo, interp);//pass thread and
                     // interp to new silo class
@@ -256,102 +263,102 @@ public class Display {
                 //    this.stop();
                 //}
 
-                    long finishTime = System.nanoTime();
-                    long time =
-                            TimeUnit.NANOSECONDS.toMillis(
-                                    finishTime - startTime);
-                    float elapsed = (float) time / 1000;
-                    if (elapsed > 1) {
-                        grid.getChildren().clear();
-                        outbox.getChildren().clear();
-                        inbox.getChildren().clear();
+                long finishTime = System.nanoTime();
+                long time =
+                        TimeUnit.NANOSECONDS.toMillis(
+                                finishTime - startTime);
+                float elapsed = (float) time / 1000;
+                if (elapsed > 1) {
+                    grid.getChildren().clear();
+                    outbox.getChildren().clear();
+                    inbox.getChildren().clear();
 
-                        int outer = 0;
-                        for (int i = 0; i < location.length; i++) {
-                            for (int j = 0; j < location[0].length; j++) {
+                    int outer = 0;
+                    for (int i = 0; i < location.length; i++) {
+                        for (int j = 0; j < location[0].length; j++) {
 
-                                if (location[i][j].equals("port")) {
+                            if (location[i][j].equals("port")) {
 
-                                    Label port = new Label("port");
-                                    port.setAlignment(Pos.BASELINE_CENTER);
-                                    //grid.add(port, j, i);
-                                    if (elements[i][j] != null) {
-                                        BorderPane temp = elements[i][j].toGUI();
-                                        grid.add(temp, j, i);
-                                    } else {
-                                        HBox temp = new HBox();
-                                        grid.add(temp, j, i);
-                                    }
-
+                                Label port = new Label("port");
+                                port.setAlignment(Pos.BASELINE_CENTER);
+                                //grid.add(port, j, i);
+                                if (elements[i][j] != null) {
+                                    BorderPane temp = elements[i][j].toGUI();
+                                    grid.add(temp, j, i);
+                                } else {
+                                    HBox temp = new HBox();
+                                    grid.add(temp, j, i);
                                 }
-                                if (location[i][j].equals("silo")) {
-                                    TextArea sil = new TextArea();
 
-                                    List<String> texts = instruct.get(outer);
-                                    for (String s : texts) {
-                                        sil.appendText(s + "\n");
-                                    }
-                                    sil.setPrefSize(120, 120);
-                                    grid.add(sil, j, i);
-                                    String text = sil.getText();
-                                    int endIndex = text.indexOf("\n");
-                                    sil.setStyle(
-                                            "-fx-highlight-fill: lightgray; " +
-                                                    "-fx-highlight-text-fill: black;");
-                                    sil.selectRange(0, endIndex);
-                                    outer++;
+                            }
+                            if (location[i][j].equals("silo")) {
+                                TextArea sil = new TextArea();
+
+                                List<String> texts = instruct.get(outer);
+                                for (String s : texts) {
+                                    sil.appendText(s + "\n");
                                 }
-                                if (location[i][j].equals("inpt")) {
-                                    if (elements[i][j] != null) {
-                                        BorderPane temp = elements[i][j].toGUI();
-                                        grid.add(temp, j, i);
-                                    } else {
-                                        HBox temp = new HBox();
-                                        grid.add(temp, j, i);
-                                    }
-
-                                    TextArea input = new TextArea("input\n");
-                                    input.setEditable(false);
-                                    input.setPrefSize(50, 200);
-
-                                    for (Object s :
-                                            parcer.getinputs()[i][j]) {
-                                        input.appendText(s + "\n");
-                                    }
-                                    inbox.getChildren().addAll(input);
-
-
+                                sil.setPrefSize(120, 120);
+                                grid.add(sil, j, i);
+                                String text = sil.getText();
+                                int endIndex = text.indexOf("\n");
+                                sil.setStyle(
+                                        "-fx-highlight-fill: lightgray; " +
+                                                "-fx-highlight-text-fill: black;");
+                                sil.selectRange(0, endIndex);
+                                outer++;
+                            }
+                            if (location[i][j].equals("inpt")) {
+                                if (elements[i][j] != null) {
+                                    BorderPane temp = elements[i][j].toGUI();
+                                    grid.add(temp, j, i);
+                                } else {
+                                    HBox temp = new HBox();
+                                    grid.add(temp, j, i);
                                 }
-                                if (location[i][j].equals("oupt")) {
-                                    if (elements[i][j] != null) {
-                                        BorderPane temp = elements[i][j].toGUI();
-                                        grid.add(temp, j, i);
-                                        TextArea output = new TextArea("output");
-                                        output.setEditable(false);
-                                        output.setPrefSize(50, 200);
-                                        output.setMaxSize(55, 200);
-                                        output.setMinSize(55, 200);
-                                        outbox.getChildren().addAll(output);
-                                        ArrayList<Integer> temp1 =
-                                                getList((OutPort) elements[i][j]);
-                                        for (Object s : temp1 ) {
-                                             output.appendText("\n" + s);
-                                        }
-                                    } else {
-                                        HBox temp = new HBox();
-                                        grid.add(temp, j, i);
-                                    }
 
-                                  //  for (Object s : temp ) {
-                                   //     output.appendText(s + "\n");
-                                    //}
+                                TextArea input = new TextArea("input\n");
+                                input.setEditable(false);
+                                input.setPrefSize(50, 200);
 
-
+                                for (Object s :
+                                        parcer.getinputs()[i][j]) {
+                                    input.appendText(s + "\n");
                                 }
+                                inbox.getChildren().addAll(input);
+
+
+                            }
+                            if (location[i][j].equals("oupt")) {
+                                if (elements[i][j] != null) {
+                                    BorderPane temp = elements[i][j].toGUI();
+                                    grid.add(temp, j, i);
+                                    TextArea output = new TextArea("output");
+                                    output.setEditable(false);
+                                    output.setPrefSize(50, 200);
+                                    output.setMaxSize(55, 200);
+                                    output.setMinSize(55, 200);
+                                    outbox.getChildren().addAll(output);
+                                    ArrayList<Integer> temp1 =
+                                            getList((OutPort) elements[i][j]);
+                                    for (Object s : temp1 ) {
+                                        output.appendText("\n" + s);
+                                    }
+                                } else {
+                                    HBox temp = new HBox();
+                                    grid.add(temp, j, i);
+                                }
+
+                                //  for (Object s : temp ) {
+                                //     output.appendText(s + "\n");
+                                //}
+
+
                             }
                         }
-
                     }
+
+                }
 
             }
 
@@ -395,6 +402,15 @@ public class Display {
             for (int j = 0; j < location[0].length; j++) {
                 if (location[i][j].equals("silo")) {
                     ((Silo) elements[i][j]).resumesilo();
+                }
+            }
+        }
+    }
+    public void stepALLsilos() {
+        for (int i = 0; i < location.length; i++) {
+            for (int j = 0; j < location[0].length; j++) {
+                if (location[i][j].equals("silo")) {
+                    ((Silo) elements[i][j]).stepsilo();
                 }
             }
         }

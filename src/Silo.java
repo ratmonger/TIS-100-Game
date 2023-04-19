@@ -29,4 +29,7 @@ public class Silo implements Component{
     public void resumesilo(){
         interp.resume();
     }
+    public void stepsilo(){
+        interp.step();
+    }
 }

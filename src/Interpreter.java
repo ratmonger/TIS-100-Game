@@ -12,6 +12,7 @@ public class Interpreter implements Runnable {
     static int counter = 0;
     private final CountDownLatch latch;
     private volatile boolean isRunning = false;
+    private volatile boolean isStep = false;
     int index = 0;
     int count = 0;
 
@@ -182,23 +183,27 @@ public class Interpreter implements Runnable {
                     break;
                 default: //label here, do nothing?
             }
-
+            latch.countDown();
             count++;
             System.out.println(
                     Thread.currentThread().getName() + " ACC:" + ACC + " BAK:" +
                             BAK);
             try {
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-
-            latch.countDown();
-            try {
                 latch.await();
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
+            if(isStep){
+                isStep=false;
+                isRunning=false;
+            } else {
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+
         }
     }
 
@@ -271,6 +276,11 @@ public class Interpreter implements Runnable {
         synchronized (this) {
             this.notifyAll();
         }
+    }
+
+    public void step() {
+        isStep =true;
+        resume();
     }
 
 

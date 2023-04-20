@@ -106,6 +106,9 @@ public class Parcer {
     }
 
 
+    /**
+     * Captures the next lines of input into the input ports
+     */
     public  void inputFN(){
         Queue<Integer> queue = new LinkedList<>();
         //System.out.println(input.nextLine());
@@ -140,7 +143,9 @@ public class Parcer {
 
 
 
-
+    /**
+     * Prints the array of elements
+     */
     public void printarray(String[][] array){
         for (int i = 0; i < array.length; i++) {
             for (int j = 0; j < array[i].length; j++) {
@@ -151,6 +156,9 @@ public class Parcer {
         System.out.println();
     }
 
+    /**
+     * Captures the next lines of input into the output ports
+     */
     public  void outputFN() {
         int row = input.nextInt();
         int col = input.nextInt();
@@ -171,35 +179,66 @@ public class Parcer {
 
     }
 
-    // returns original grid size
+    /**
+     * Gets the rows
+     * @return rows
+     */
     public int getRows(){
         return row1;
     }
 
+    /**
+     * Gets the cols
+     * @return cols
+     */
     public int getCols(){
         return col1;
     }
 
-    // returns expanded grid size
+    /**
+     * Gets the rows that were made on new array
+     * @return new rows
+     */
     public int getRowsNew(){
         return numRows;
     }
 
+    /**
+     * Gets the cols made for the new array
+     * @return number of new cols
+     */
     public int getColsNew(){
         return numCols;
     }
 
 
+    /**
+     * Gets the instructions
+     * @return list of instructions
+     */
     public ArrayList<ArrayList<String>> getinstruct(){
         return instruct;
     }
+
+    /**
+     * Returns string rep of the grid as array
+     * @return string array
+     */
     public String[][] getarray(){
         return newArray;
     }
+
+    /**
+     * Returns all the queues in an array
+     * @return array of queues
+     */
     public Queue[][] getinputs(){
         return inputs;
     }
 
+    /**
+     * Sets the instructions to the given list
+     */
     public void setInstruct( ArrayList<ArrayList<String>> ls){
         instruct = ls;
     }

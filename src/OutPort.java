@@ -43,7 +43,7 @@ public class OutPort extends Port {
         }
 
 
-        
+
 
         HBox hbox = new HBox();
         hbox.setAlignment(Pos.CENTER);

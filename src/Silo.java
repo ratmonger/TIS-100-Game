@@ -1,6 +1,7 @@
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -10,6 +11,7 @@ import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.util.Pair;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +19,7 @@ public class Silo implements Component{
 
     private Thread siloThread;
     private Interpreter interp;
+    private TextArea siloText;
 
     public Silo (Thread t, Interpreter interp){
         this.siloThread = t;
@@ -31,14 +34,15 @@ public class Silo implements Component{
                 "-fx-border-width: 3;\n";
 
         TextArea sil = new TextArea();
+        sil.setEditable(true);
         sil.setFont(new Font("Courier New Bold", 12));
 
         ArrayList<String> texts = getSiloCommands();
         for (String s : texts) {
             sil.appendText(s + "\n");
         }
+        this.siloText = sil;
         sil.setPrefSize(130, 130);
-        String text = sil.getText();
 
 
         sil.setStyle(
@@ -167,5 +171,18 @@ public class Silo implements Component{
         pair[1] = totalChar + getSiloCommands().get(instruct).length();
 
         return pair;
+    }
+
+    public ArrayList<String> getSiloText() {
+        ArrayList<String> temp = new ArrayList<String>();
+
+        String lines = siloText.getText();
+        String delimiter = "\n";
+        String[] stringArr = lines.split(delimiter);
+        for (int i = 0; i < stringArr.length; i++){
+            temp.add(stringArr[i]);
+        }
+
+        return temp;
     }
 }

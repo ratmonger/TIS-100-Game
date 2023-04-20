@@ -105,6 +105,7 @@ public class Parcer {
 
     }
 
+
     public  void inputFN(){
         Queue<Integer> queue = new LinkedList<>();
         //System.out.println(input.nextLine());
@@ -197,5 +198,9 @@ public class Parcer {
     }
     public Queue[][] getinputs(){
         return inputs;
+    }
+
+    public void setInstruct( ArrayList<ArrayList<String>> ls){
+        instruct = ls;
     }
 }

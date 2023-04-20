@@ -53,6 +53,13 @@ public class Interpreter implements Runnable {
 
     @Override
     public void run() {
+        // added this trying to slow it down
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         while (true) {
             synchronized (this) {
                 while (!isRunning) {
@@ -74,6 +81,15 @@ public class Interpreter implements Runnable {
             }
 
 
+            if (parcer.getinstruct().get(index).size() -1 < count) {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                latch.countDown();
+                continue;
+            }
             String word = (String) parcer.getinstruct().get(index).get(count);
             Scanner sc = new Scanner(word);
             int srcint = 0;

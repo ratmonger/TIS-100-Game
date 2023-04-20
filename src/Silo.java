@@ -73,7 +73,12 @@ public class Silo implements Component{
         // WRITE A SILO METHOD THAT RETURNS THE RANGE!
 
         int[] range = getCommandRange();
-        sil.selectRange(range[0], range[1]);
+
+        if (range[0] != -1) {
+
+
+            sil.selectRange(range[0], range[1]);
+        }
         Label acc = new Label("ACC:\n"+this.interp.getACC() );
         Label bak = new Label("BAK:\n"+this.interp.getBAK() );
         acc.setAlignment(Pos.CENTER);
@@ -143,6 +148,14 @@ public class Silo implements Component{
         int instruct = this.interp.getCount();
         int totalChar = 0;
         int size = getSiloCommands().size();
+
+        if (size == 0) {
+            pair[0] = -1;
+            pair[1] = -1;
+
+            return pair;
+        }
+
         if (instruct > size -1){
             instruct = 0;
         }

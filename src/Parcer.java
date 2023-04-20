@@ -81,7 +81,6 @@ public class Parcer {
             }
 
 
-
             while(input.hasNextLine()) {
 
                 if (line.equals("INPUT")) {
@@ -108,7 +107,9 @@ public class Parcer {
 
     public  void inputFN(){
         Queue<Integer> queue = new LinkedList<>();
+        //System.out.println(input.nextLine());
         int row = input.nextInt();
+
         int col = input.nextInt();
         String val = input.next();
         while (!val.equals("END")){

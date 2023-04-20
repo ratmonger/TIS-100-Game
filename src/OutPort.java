@@ -19,12 +19,19 @@ public class OutPort extends Port {
 
     private ArrayList<Integer> outputInts = new ArrayList<Integer>(0);
 
+    /** Returns list of numbers passed to the outport
+     * @return arraylist of numbers
+     */
     public ArrayList<Integer> getOutputInts(){
 
 
         return this.outputInts;
     }
 
+    /**
+     * Fills a borderpane with the representation of an Output Port
+     * @return borderpane containing GUI representation of an output port
+     */
     @Override
     public BorderPane toGUI() {
 
@@ -36,23 +43,7 @@ public class OutPort extends Port {
         }
 
 
-
-        /*
-        in
-         up in
-         down out
-         left out
-           right in
-
-
-
-           dst
-           up out
-           down in
-           left in
-           right out
-         */
-
+        
 
         HBox hbox = new HBox();
         hbox.setAlignment(Pos.CENTER);

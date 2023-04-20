@@ -35,22 +35,38 @@ public class Interpreter implements Runnable {
 
     }
 
+    /**
+     * Returns list of the interpreters instructions
+     * @return interpreter instructions
+     */
     public ArrayList<String> getCommands(){
         return this.parcer.getinstruct().get(index);
     }
 
+    /**
+     * Returns the count
+     * @return the count
+     */
     public int getCount(){
         return this.count;
     }
 
+    /** Returns the int value of the register ACC
+     * @return ACC register
+     */
     public int getACC(){
         return ACC;
     }
 
+    /** Returns the int value of the register ACC
+     * @return ACC register
+     */
     public int getBAK(){
         return BAK;
     }
 
+    /** Runs the logic for the interpreter
+     */
     @Override
     public void run() {
 
@@ -237,6 +253,10 @@ public class Interpreter implements Runnable {
         }
     }
 
+    /** Returns the int value of the register ACC
+     * @param src the type of source given
+     * @return the int value of the source
+     */
     public int srcCase(String src) {
         int srcint = 0;
         switch (src) {
@@ -298,9 +318,15 @@ public class Interpreter implements Runnable {
         }
         return srcint;
     }
+
+    /** Pauses the interpreter
+     */
     public void pause() {
         isRunning = false;
     }
+
+    /** Resumes the interpreter
+     */
     public void resume() {
         isRunning = true;
         synchronized (this) {
@@ -308,6 +334,8 @@ public class Interpreter implements Runnable {
         }
     }
 
+    /** Steps and resumes
+     */
     public void step() {
         isStep =true;
         resume();

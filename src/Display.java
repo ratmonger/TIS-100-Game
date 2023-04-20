@@ -138,6 +138,7 @@ public class Display {
         Boolean[] firstime = {true};
         Boolean[] istep = {false};
         start.setOnAction(e -> {
+            startTimer();
             paused = false;
                               if (firstime[0]) {
                                   startAllSilo();
@@ -161,6 +162,8 @@ public class Display {
                                       firstime[0] = false;
                                   }
                                   stepALLsilos();
+                                  startTimer();
+                                  delay = 1000;
                                   paused = true;
 
                               }
@@ -394,6 +397,7 @@ public class Display {
         Boolean[] firstime = {true};
         Boolean[] istep = {false};
         start.setOnAction(e -> {
+            startTimer();
             paused = false;
                               if (firstime[0]) {
 
@@ -435,6 +439,8 @@ public class Display {
                                       firstime[0] = false;
                                   }
                                   stepALLsilos();
+                                  startTimer();
+                                  delay = 1000;
                                   paused = true;
 
                               }
@@ -677,6 +683,7 @@ public class Display {
         Boolean[] firstime = {true};
         Boolean[] istep = {false};
         start.setOnAction(e -> {
+            startTimer();
             paused = false;
                               if (firstime[0]) {
 
@@ -718,6 +725,8 @@ public class Display {
                                       firstime[0] = false;
                                   }
                                   stepALLsilos();
+                                  startTimer();
+                                  delay = 1000;
                                   paused = true;
 
                               }

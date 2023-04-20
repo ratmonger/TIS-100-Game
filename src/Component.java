@@ -8,11 +8,10 @@ public interface Component {
      */
 
 
-    /* returns GUI representation of the component*/
+
+    /**
+     * returns GUI representation of the component
+     * @return Borderpane GUI information
+     */
     BorderPane toGUI();
-
-
-
-
-
 }

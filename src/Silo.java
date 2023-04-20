@@ -25,7 +25,10 @@ public class Silo implements Component{
         this.siloThread = t;
         this.interp = interp;
     }
-
+    /**
+     * creates silo GUI components
+     * @return Borderpane with silo gui info
+     */
     @Override
     public BorderPane toGUI() {
 
@@ -125,28 +128,47 @@ public class Silo implements Component{
         return bp;
 
     }
-
+    /**
+     * runs silo thread
+     */
     public void runSilo(){
         siloThread.run();
     }
-
+    /**
+     * starts silo thread
+     */
     public void startSilo(){
         siloThread.start();
     }
+    /**
+     * calls interpreter to pause thread
+     */
     public void pauseSilo(){
         interp.pause();
     }
+    /**
+     * calls interpreter to resume thread
+     */
     public void resumesilo(){
         interp.resume();
     }
+    /**
+     * calls interpreter to do 1 step of thread
+     */
     public void stepsilo(){
         interp.step();
     }
-
+    /**
+     * gets the commands the silo needs to do
+     * @return ArrayList<String> with commands
+     *     */
     public ArrayList<String> getSiloCommands(){
         return this.interp.getCommands();
     }
-
+    /**
+     * gets what needs to be highlighted in silo textarea
+     * @return int[]
+     **/
     public int[] getCommandRange(){
         int[] pair = new int[2];
         int instruct = this.interp.getCount();
@@ -172,7 +194,10 @@ public class Silo implements Component{
 
         return pair;
     }
-
+    /**
+     * gets the text on the silos textarea
+     * @return ArrayList<String>
+     **/
     public ArrayList<String> getSiloText() {
         ArrayList<String> temp = new ArrayList<String>();
 

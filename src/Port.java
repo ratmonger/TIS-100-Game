@@ -22,6 +22,7 @@ public class Port implements Runnable, Component {
     private int rows;
     private int cols;
 
+
     public Port(int x, int y, int rows, int cols) {
         this.rowOffset = x;
         this.colOffset = y;
@@ -32,7 +33,7 @@ public class Port implements Runnable, Component {
     }
 
 
-    // returns the first element
+
     public int peekPort() {
         return outQueue.peek();
     }
@@ -43,36 +44,61 @@ public class Port implements Runnable, Component {
     }
 
 
+    /**
+     * sends out rowOffset
+     * @return rowOffset int
+     */
     public int getRowOffset() {
         return rowOffset;
     }
-
+    /**
+     * sends colOffset out
+     *  @return colOFFset int
+     */
     public int getColOffset(){
         return colOffset;
     }
-
+    /**
+     * sends row index out
+     *  @return row index int
+     */
     public int getRows(){
         return rows;
     }
-
+    /**
+     * sends row index out
+     * @return col index int
+     */
     public int getCols(){
         return cols;
     }
 
-
+    /**
+     * sends ports first  BlockingQueue
+     * @return Inqueue
+     */
     public BlockingQueue<Integer> getInQueue() {
         return inQueue;
     }
-
+    /**
+     * sends ports second  BlockingQueue
+     * @return outQueue
+     */
     public BlockingQueue<Integer> getOutQueue() {
         return outQueue;
     }
 
+    /**
+     * runs port thread
+     */
     @Override
     public void run() {
         System.out.println("waiting for input");
     }
-
+    /**
+     * updates port GUI elements
+     * @return Borderpane for the GUI
+     */
     @Override
     public BorderPane toGUI() {
 
@@ -136,7 +162,11 @@ public class Port implements Runnable, Component {
         return temp;
     }
 
-
+    /**
+     * Creates right arrow for ports
+     * @param x, y
+     * @return group of nods that create rightarrow
+     */
     public Group RightArrow(double x, double y) {
         Group group = new Group();
 
@@ -161,7 +191,11 @@ public class Port implements Runnable, Component {
         group.setLayoutY(y);
         return group;
     }
-
+    /**
+     * Creates left arrow for ports
+     * @param x, y
+     * @return group of nods that create left arrow
+     */
     public Group LeftArrow(double x, double y) {
         Group group = new Group();
         Polygon arrow = new Polygon();
@@ -185,7 +219,11 @@ public class Port implements Runnable, Component {
         group.setLayoutY(y);
         return group;
     }
-
+    /**
+     * Creates up arrow for ports
+     * @param x y
+     * @return group of nods that create up arrow
+     */
     public Group UpArrow(double x, double y) {
         Group group = new Group();
         Polygon arrow = new Polygon();
@@ -209,7 +247,11 @@ public class Port implements Runnable, Component {
         return group;
 
     }
-
+    /**
+     * Creates down arrow for ports
+     * @param x y
+     * @return group of nods that create down arrow
+     */
     public Group DownArrow(double x, double y) {
         Group group = new Group();
         Polygon arrow = new Polygon();

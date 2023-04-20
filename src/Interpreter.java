@@ -11,15 +11,13 @@ public class Interpreter implements Runnable {
     private Port downPort;
     private Port leftPort;
     private Port rightPort;
-    static int counter = 0;
+
     private final CountDownLatch latch;
     private volatile boolean isRunning = false;
     private volatile boolean isStep = false;
     int index = 0;
     private int count = 0;
     private Parcer parcer;
-
-
     public Interpreter(Port upPort, Port downPort, Port leftPort,
                        Port rightPort, CountDownLatch latch, int index,
                        Parcer parcer) {
@@ -34,7 +32,6 @@ public class Interpreter implements Runnable {
         this.BAK = 0;
 
     }
-
     public ArrayList<String> getCommands(){
         return this.parcer.getinstruct().get(index);
     }
@@ -298,6 +295,7 @@ public class Interpreter implements Runnable {
         }
         return srcint;
     }
+
     public void pause() {
         isRunning = false;
     }
@@ -307,11 +305,8 @@ public class Interpreter implements Runnable {
             this.notifyAll();
         }
     }
-
     public void step() {
         isStep =true;
         resume();
     }
-
-
 }

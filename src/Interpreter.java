@@ -123,6 +123,7 @@ public class Interpreter implements Runnable {
                         count = parcer.getinstruct().get(index).indexOf(":"+label+":") -
                                 1;
                     }
+                    break;
 
                 case "JNZ":
                     label = sc.next();
@@ -130,6 +131,7 @@ public class Interpreter implements Runnable {
                         count = parcer.getinstruct().get(index).indexOf(":"+label+":") -
                                 1;
                     }
+                    break;
 
                 case "JGZ":
                     label = sc.next();
@@ -137,6 +139,7 @@ public class Interpreter implements Runnable {
                         count = parcer.getinstruct().get(index).indexOf(":"+label+":") -
                                 1;
                     }
+                    break;
 
                 case "JLZ":
                     label = sc.next();
@@ -144,6 +147,7 @@ public class Interpreter implements Runnable {
                         count = parcer.getinstruct().get(index).indexOf(":"+label+":") -
                                 1;
                     }
+                    break;
 
                 case "ADD":
                     src = sc.next();

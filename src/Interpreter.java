@@ -70,11 +70,6 @@ public class Interpreter implements Runnable {
                     this.downPort.getInQueue() != null && this.downPort.getInQueue().size() > 0 ||
                     this.leftPort.getInQueue() != null && this.leftPort.getInQueue().size() > 0 ||
                     this.rightPort.getOutQueue() != null && this.rightPort.getOutQueue().size() > 0 ){
-                try {
-                    Thread.sleep(2000);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
                 continue;
             }
 
@@ -220,7 +215,7 @@ public class Interpreter implements Runnable {
                 isRunning=false;
             } else {
                 try {
-                    Thread.sleep(2000);
+                    Thread.sleep(500);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }

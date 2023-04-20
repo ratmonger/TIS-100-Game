@@ -27,4 +27,5 @@ java -jar TIS100.jar
 
 To run from source files:
 javac *.java
+
 java Main

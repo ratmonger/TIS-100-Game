@@ -5,7 +5,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
-import jdk.swing.interop.SwingInterOpUtils;
 
 
 public class InputPort extends Port {
@@ -15,25 +14,12 @@ public class InputPort extends Port {
         super(i,j,length, length1);
     }
 
+    /**
+     * Fills a borderpane with the representation of an Input Port
+     * @return borderpane containing GUI representation of an inputport
+     */
     @Override
     public BorderPane toGUI() {
-
-        /*
-        in
-         up in
-         down out
-         left out
-           right in
-
-
-
-           dst
-           up out
-           down in
-           left in
-           right out
-         */
-
 
         HBox hbox = new HBox();
         hbox.setAlignment(Pos.CENTER);

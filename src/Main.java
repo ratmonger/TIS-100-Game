@@ -1,21 +1,18 @@
 import javafx.application.Application;
-import javafx.application.Platform;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Insets;
+
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
-import java.util.List;
-import java.util.Queue;
-import java.util.concurrent.CountDownLatch;
+
 
 public class Main extends Application {
     private Scene scene;
@@ -25,6 +22,11 @@ public class Main extends Application {
         launch(args);
     }
 
+
+    /**
+     * Launches the program and GUI
+     * @param primaryStage // utilizes the top level javafx container
+     */
     @Override
     public void start(Stage primaryStage) throws Exception {
         this.parcer = new Parcer();

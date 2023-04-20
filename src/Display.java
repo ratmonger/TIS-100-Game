@@ -7,13 +7,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
@@ -178,14 +176,6 @@ public class Display {
                     }
                 }
 
-//                for (ArrayList<String> ls : instructions) {
-//                    for (String s: ls
-//                         ) {
-//                        System.out.println(s);
-//
-//                    }
-//
-//                }
 
                 new Display(scene, parcer,instructions);
 
@@ -433,14 +423,6 @@ public class Display {
                     }
                 }
 
-//                for (ArrayList<String> ls : instructions) {
-//                    for (String s: ls
-//                         ) {
-//                        System.out.println(s);
-//
-//                    }
-//
-//                }
 
                 new Display(scene, parcer,instructions);
 
@@ -552,16 +534,15 @@ public class Display {
 
 
 
+    /**
+     * Runs the animation timer loop that draws the GUI repeatedly
+     */
     public void startTimer() {
 
         this.startTime = System.nanoTime();
         AnimationTimer timer = new AnimationTimer() {
             @Override
             public void handle(long now) {
-
-                //if (finish) {
-                //    this.stop();
-                //}
 
                 long finishTime = System.nanoTime();
                 long time =
@@ -573,7 +554,6 @@ public class Display {
                     outbox.getChildren().clear();
                     inbox.getChildren().clear();
 
-                    int outer = 0;
                     for (int i = 0; i < location.length; i++) {
                         for (int j = 0; j < location[0].length; j++) {
 
@@ -581,7 +561,6 @@ public class Display {
 
                                 Label port = new Label("port");
                                 port.setAlignment(Pos.BASELINE_CENTER);
-                                //grid.add(port, j, i);
                                 if (elements[i][j] != null) {
                                     BorderPane temp = elements[i][j].toGUI();
                                     grid.add(temp, j, i);
@@ -594,7 +573,6 @@ public class Display {
                             if (location[i][j].equals("silo")) {
 
                                 grid.add(elements[i][j].toGUI(), j, i);
-                                outer++;
                             }
                             if (location[i][j].equals("inpt")) {
                                 if (elements[i][j] != null) {
@@ -641,9 +619,6 @@ public class Display {
                                     grid.add(temp, j, i);
                                 }
 
-                                //  for (Object s : temp ) {
-                                //     output.appendText(s + "\n");
-                                //}
 
 
                             }
@@ -661,6 +636,11 @@ public class Display {
     }
 
 
+    /**
+     * Customizes a label to some desired attributes
+     * @param o  a port
+     * @return ArrayList of the ports numbers from a queue
+     */
     public ArrayList<Integer> getList(OutPort o){
         return o.getOutputInts();
 
@@ -670,7 +650,9 @@ public class Display {
 
 
 
-
+    /**
+     * Starts all of the threads for each silo and begins the animation timer
+     */
     public void startAllSilo() {
         for (int i = 0; i < location.length; i++) {
             for (int j = 0; j < location[0].length; j++) {
@@ -682,6 +664,10 @@ public class Display {
         }
         startTimer();
     }
+
+    /**
+     * Waits all theads for each silo
+     */
     public void stopALLsilos() {
         for (int i = 0; i < location.length; i++) {
             for (int j = 0; j < location[0].length; j++) {
@@ -691,6 +677,10 @@ public class Display {
             }
         }
     }
+
+    /**
+     * Resumes all silo threads
+     */
     public void resumesilos() {
         for (int i = 0; i < location.length; i++) {
             for (int j = 0; j < location[0].length; j++) {
@@ -700,6 +690,10 @@ public class Display {
             }
         }
     }
+
+    /**
+     * Calls stepsilo on each silo, stepping
+     */
     public void stepALLsilos() {
         for (int i = 0; i < location.length; i++) {
             for (int j = 0; j < location[0].length; j++) {

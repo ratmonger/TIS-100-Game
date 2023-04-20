@@ -53,12 +53,6 @@ public class Interpreter implements Runnable {
 
     @Override
     public void run() {
-        // added this trying to slow it down
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
 
         while (true) {
             synchronized (this) {
@@ -79,7 +73,6 @@ public class Interpreter implements Runnable {
                     this.rightPort.getOutQueue() != null && this.rightPort.getOutQueue().size() > 0 ){
                 continue;
             }
-
 
             if (parcer.getinstruct().get(index).size() -1 < count) {
                 try {
@@ -235,7 +228,7 @@ public class Interpreter implements Runnable {
                 isRunning=false;
             } else {
                 try {
-                    Thread.sleep(500);
+                    Thread.sleep(1000);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }

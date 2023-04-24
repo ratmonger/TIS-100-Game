@@ -4,7 +4,10 @@
  * @class CS351
  * @project TIS100
  *
- * Windows compile: no compile, run the jar
+ * Windows compile: javac *.java
+ * Windows execute: java Main
+ *
+ * Or with jar
  * Windows execute: java -jar TIS100.jar
  *
  * The program emulates the game TIS-100 by Zachtronics.

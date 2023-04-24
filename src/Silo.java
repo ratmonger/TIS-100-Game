@@ -1,7 +1,22 @@
+/**
+ * @author Bryce Palmer, Amr Kassem, Momen KatbaBader
+ * @version date ( in_ISO_8601 format : 2023 - 4 - 19 )
+ * @class CS351
+ * @project TIS100
+ *
+ * Windows compile: javac *.java
+ * Windows execute: java Main
+ *
+ * Or with jar
+ * Windows execute: java -jar TIS100.jar
+ *
+ * The program emulates the game TIS-100 by Zachtronics.
+ * The program reads in mock assembly language code that performs sepcific
+ * task on a set of number to produce a set of outputs.
+ */
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -9,11 +24,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
-import javafx.util.Pair;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Silo implements Component{
 

@@ -1,12 +1,28 @@
+/**
+ * @author Bryce Palmer, Amr Kassem, Momen KatbaBader
+ * @version date ( in_ISO_8601 format : 2023 - 4 - 19 )
+ * @class CS351
+ * @project TIS100
+ *
+ * Windows compile: javac *.java
+ * Windows execute: java Main
+ *
+ * Or with jar
+ * Windows execute: java -jar TIS100.jar
+ *
+ * The program emulates the game TIS-100 by Zachtronics.
+ * The program reads in mock assembly language code that performs sepcific
+ * task on a set of number to produce a set of outputs.
+ */
+
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.CountDownLatch;
 
 public class Interpreter implements Runnable {
 
-    int ACC;
-    int BAK;
+    private int ACC;
+    private int BAK;
     private Port upPort;
     private Port downPort;
     private Port leftPort;
@@ -15,7 +31,7 @@ public class Interpreter implements Runnable {
     private final CountDownLatch latch;
     private volatile boolean isRunning = false;
     private volatile boolean isStep = false;
-    int index = 0;
+    private int index = 0;
     private int count = 0;
     private Parcer parcer;
     public Interpreter(Port upPort, Port downPort, Port leftPort,
@@ -80,7 +96,8 @@ public class Interpreter implements Runnable {
                 latch.countDown();
                 continue;
             }
-            String word = (String) parcer.getinstruct().get(index).get(count);
+            String word =
+                    (String) parcer.getinstruct().get(index).get(count);
             Scanner sc = new Scanner(word);
             int srcint = 0;
             int dstint = 0;

@@ -1,3 +1,20 @@
+/**
+ * @author Bryce Palmer, Amr Kassem, Momen KatbaBader
+ * @version date ( in_ISO_8601 format : 2023 - 4 - 19 )
+ * @class CS351
+ * @project TIS100
+ *
+ * Windows compile: javac *.java
+ * Windows execute: java Main
+ *
+ * Or with jar
+ * Windows execute: java -jar TIS100.jar
+ *
+ * The program emulates the game TIS-100 by Zachtronics.
+ * The program reads in mock assembly language code that performs specific
+ * task on a set of number to produce a set of outputs.
+ */
+
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.control.Label;
@@ -17,10 +34,10 @@ public class Port implements Runnable, Component {
 
     private final BlockingQueue<Integer> inQueue;
     private final BlockingQueue<Integer> outQueue;
-    private int rowOffset;
-    private int colOffset;
-    private int rows;
-    private int cols;
+    private final int rowOffset;
+    private final int colOffset;
+    private final int rows;
+    private final int cols;
 
 
     public Port(int x, int y, int rows, int cols) {
@@ -30,17 +47,6 @@ public class Port implements Runnable, Component {
         this.cols = cols;
         this.inQueue = new LinkedBlockingQueue<>();
         this.outQueue = new LinkedBlockingQueue<>();
-    }
-
-
-
-    public int peekPort() {
-        return outQueue.peek();
-    }
-
-    // removes and returns the first element
-    public int popPort() {
-        return outQueue.poll();
     }
 
 
@@ -102,26 +108,9 @@ public class Port implements Runnable, Component {
     @Override
     public BorderPane toGUI() {
 
-        /*
-        in
-         up in
-         down out
-         left out
-           right in
-
-
-
-           dst
-           up out
-           down in
-           left in
-           right out
-         */
-
 
         HBox hbox = new HBox();
         hbox.setAlignment(Pos.CENTER);
-        //hbox.setBackground(Background.fill(Color.YELLOW)); // display box size
         VBox vbox = new VBox();
         vbox.setAlignment(Pos.CENTER);
         hbox.setMinSize(50, 50);
@@ -158,8 +147,7 @@ public class Port implements Runnable, Component {
             hbox2.getChildren().add(in);
         }
         hbox.getChildren().add(vbox);
-        BorderPane temp = new BorderPane(hbox);
-        return temp;
+        return new BorderPane(hbox);
     }
 
     /**
